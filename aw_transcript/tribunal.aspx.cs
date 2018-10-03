@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -9,21 +7,19 @@ namespace aw_transcript
 {
     public partial class tribunal : System.Web.UI.Page
     {
-        static Guid guid_fidusuario, guid_fidcentro;
+        private static Guid guid_fidusuario, guid_fidcentro;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
-
                 if (!IsPostBack)
                 {
                     inf_user();
                     load_ddl();
-
                 }
                 else
                 {
-
                 }
             }
             catch
@@ -31,9 +27,9 @@ namespace aw_transcript
                 Response.Redirect("acceso.aspx");
             }
         }
+
         private void inf_user()
         {
-
             guid_fidusuario = (Guid)(Session["ss_id_user"]);
             //Session.Abandon();
 
@@ -52,7 +48,6 @@ namespace aw_transcript
                                     i_tu.id_tipo_usuario,
                                     i_e.nombre,
                                     i_e.id_tribunal
-
                                 }).FirstOrDefault();
 
                 lbl_fuser.Text = inf_user.nombres + " " + inf_user.a_paterno + " " + inf_user.a_materno;
@@ -64,22 +59,25 @@ namespace aw_transcript
                 int str_id_type_user = inf_user.id_tipo_usuario;
                 switch (str_id_type_user)
                 {
-
                     case 1:
 
                         break;
+
                     case 2:
 
                         break;
+
                     case 3:
 
                         break;
+
                     case 4:
 
                         break;
                 }
             }
         }
+
         private void load_ddl()
         {
             ddl_colonia.Items.Clear();
@@ -94,12 +92,10 @@ namespace aw_transcript
                                       where u.id_tribunal == guid_fidcentro
                                       select u).FirstOrDefault();
 
-
                     txt_tribunal.Text = i_tribunal.nombre;
                     txt_telefono.Text = i_tribunal.telefono;
                     txt_email.Text = i_tribunal.email;
                     txt_callenum.Text = i_tribunal.callenum;
-
 
                     using (db_transcriptEntities db_sepomex = new db_transcriptEntities())
                     {
@@ -123,13 +119,13 @@ namespace aw_transcript
             {
                 limpiar_textbox();
             }
-
         }
+
         protected void btn_guardar_Click(object sender, EventArgs e)
         {
             guarda_registro();
-
         }
+
         public int id_accion()
         {
             if (chkb_editar.Checked)
@@ -149,6 +145,7 @@ namespace aw_transcript
                 return 4;
             }
         }
+
         private void guarda_registro()
         {
             string str_empresa = txt_tribunal.Text.ToUpper();
@@ -175,7 +172,6 @@ namespace aw_transcript
                                   where c.id_tribunal == guid_fidcentro
                                   select c).FirstOrDefault();
 
-
                 items_user.nombre = str_empresa;
                 items_user.telefono = str_telefono;
                 items_user.email = str_email;
@@ -192,7 +188,6 @@ namespace aw_transcript
 
                 if (ii_fecha_transf.Count == 0)
                 {
-
                 }
                 else
                 {
@@ -204,7 +199,6 @@ namespace aw_transcript
                             id_tribunal = ii_fecha_transf[0].id_tribunal,
                             id_tipo_accion = id_accion(),
                             fecha_registro = DateTime.Now,
-
                         };
                         insert_userf.inf_tribunal_dep.Add(items_userf);
                         insert_userf.SaveChanges();
@@ -226,7 +220,6 @@ namespace aw_transcript
                                     i_tu.id_tipo_usuario,
                                     i_e.nombre,
                                     i_e.id_tribunal
-
                                 }).FirstOrDefault();
 
                 lbl_fuser.Text = inf_user.nombres + " " + inf_user.a_paterno + " " + inf_user.a_materno;
@@ -242,12 +235,10 @@ namespace aw_transcript
                                   where u.id_tribunal == guid_fidcentro
                                   select u).FirstOrDefault();
 
-
                 txt_tribunal.Text = i_tribunal.nombre;
                 txt_telefono.Text = i_tribunal.telefono;
                 txt_email.Text = i_tribunal.email;
                 txt_callenum.Text = i_tribunal.callenum;
-
 
                 using (db_transcriptEntities db_sepomex = new db_transcriptEntities())
                 {
@@ -272,11 +263,13 @@ namespace aw_transcript
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
             upModal.Update();
         }
+
         protected void btn_cp_Click(object sender, EventArgs e)
         {
             string str_codigo = txt_cp.Text;
             datos_sepomex(str_codigo);
         }
+
         private void datos_sepomex(string str_codigo)
         {
             using (db_transcriptEntities db_sepomex = new db_transcriptEntities())
@@ -292,15 +285,12 @@ namespace aw_transcript
 
                 if (tbl_sepomex.Count == 1)
                 {
-
-                 
                     txt_municipio.Text = tbl_sepomex[0].D_mnpio;
                     txt_estado.Text = tbl_sepomex[0].d_estado;
                     rfv_colonia.Enabled = true;
                 }
                 if (tbl_sepomex.Count > 1)
                 {
-                   
                     ddl_colonia.Items.Insert(0, new ListItem("Seleccionar", "0"));
 
                     txt_municipio.Text = tbl_sepomex[0].D_mnpio;
@@ -309,7 +299,6 @@ namespace aw_transcript
                 }
                 else if (tbl_sepomex.Count == 0)
                 {
-                
                     ddl_colonia.Items.Clear();
                     ddl_colonia.Items.Insert(0, new ListItem("Seleccionar", "0"));
                     txt_municipio.Text = "";
@@ -318,9 +307,9 @@ namespace aw_transcript
                 }
             }
         }
+
         private void limpiar_textbox()
         {
-
             txt_tribunal.Text = "";
             txt_telefono.Text = "";
             txt_email.Text = "";
@@ -333,6 +322,7 @@ namespace aw_transcript
             txt_municipio.Text = "";
             txt_estado.Text = "";
         }
+
         protected void chkb_editar_CheckedChanged(object sender, EventArgs e)
         {
             if (chkb_editar.Checked)
@@ -343,12 +333,10 @@ namespace aw_transcript
                                       where u.id_tribunal == guid_fidcentro
                                       select u).FirstOrDefault();
 
-
                     txt_tribunal.Text = i_tribunal.nombre;
                     txt_telefono.Text = i_tribunal.telefono;
                     txt_email.Text = i_tribunal.email;
                     txt_callenum.Text = i_tribunal.callenum;
-
 
                     using (db_transcriptEntities db_sepomex = new db_transcriptEntities())
                     {

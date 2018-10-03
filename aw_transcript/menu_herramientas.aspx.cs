@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -9,20 +7,18 @@ namespace aw_transcript
 {
     public partial class menu_herramientas : System.Web.UI.Page
     {
-        static Guid guid_fidusuario, guid_fidcentro;
+        private static Guid guid_fidusuario, guid_fidcentro;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
-
                 if (!IsPostBack)
                 {
                     inf_user();
-
                 }
                 else
                 {
-
                 }
             }
             catch
@@ -30,6 +26,7 @@ namespace aw_transcript
                 Response.Redirect("acceso.aspx");
             }
         }
+
         private void inf_user()
         {
             guid_fidusuario = (Guid)(Session["ss_id_user"]);
@@ -49,7 +46,6 @@ namespace aw_transcript
                                      i_tu.id_tipo_usuario,
                                      i_e.nombre,
                                      i_e.id_tribunal
-
                                  }).FirstOrDefault();
 
                 lbl_fuser.Text = i_usuario.nombres + " " + i_usuario.a_paterno + " " + i_usuario.a_materno;
@@ -61,11 +57,10 @@ namespace aw_transcript
                 int str_id_type_user = i_usuario.id_tipo_usuario;
                 switch (str_id_type_user)
                 {
-
                     case 1:
 
-
                         break;
+
                     case 2:
                         div_salas.Visible = true;
 
@@ -73,6 +68,7 @@ namespace aw_transcript
                         div_dayvideos.Visible = true;
 
                         break;
+
                     case 3:
 
                         div_salas.Visible = true;
@@ -80,6 +76,7 @@ namespace aw_transcript
                         div_transformation.Visible = true;
                         div_dayvideos.Visible = true;
                         break;
+
                     case 4:
                         div_salas.Visible = false;
 
@@ -89,8 +86,6 @@ namespace aw_transcript
                         div6.Visible = true;
                         break;
                 }
-
-
             }
 
             using (db_transcriptEntities edm_fecha_transf = new db_transcriptEntities())
@@ -100,12 +95,9 @@ namespace aw_transcript
 
                 if (i_fecha_transf.Count != 0)
                 {
-
                 }
             }
-
         }
-
 
         protected void img_salas_Click(object sender, ImageClickEventArgs e)
         {
@@ -121,6 +113,7 @@ namespace aw_transcript
         {
             Response.Redirect("programar_depuracion.aspx");
         }
+
         protected void img_conversion_Click(object sender, ImageClickEventArgs e)
         {
             Response.Redirect("estatus_carga.aspx");

@@ -75,7 +75,6 @@
                         </div>
                         <div class="col-md-12">
                             <asp:Button CssClass="btn btn-success" ID="cmd_search" runat="server" Text="Buscar" OnClick="cmd_search_Click" />
-
                         </div>
                         <div class="col-md-12">
                             <br />
@@ -189,7 +188,7 @@
             </asp:UpdatePanel>
         </div>
     </div>
-    
+
     <div class="modal" id="myModal_pdf" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <asp:UpdatePanel ID="up_pdf" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
@@ -204,7 +203,6 @@
                         <div class="modal-body text-center">
 
                             <iframe id="iframe1" src="" width="600" height="500" runat="server" visible="false"></iframe>
-
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-success" data-dismiss="modal" aria-hidden="true">Ok</button>
@@ -230,7 +228,6 @@
                             <video id="Video1" runat="server" visible="false" class="img-thumbnail" controls="controls">
                                 <source src="demo" type='video/mp4;codecs="avc1.42E01E, mp4a.40.2"' />
                             </video>
-
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-success" data-dismiss="modal" aria-hidden="true">Ok</button>

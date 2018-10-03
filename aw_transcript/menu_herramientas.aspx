@@ -54,7 +54,6 @@
                     <h5>Estatus Carga de Videos</h5>
                     <asp:ImageButton ID="img_conversion" runat="server" ImageUrl="~/img/iconos/herramientas@2x.png" OnClick="img_conversion_Click" />
                 </div>
-
             </div>
             <div class="row text-center">
 
@@ -62,7 +61,6 @@
                     <h5>Estatus Carga de Videos</h5>
                     <asp:ImageButton ID="ImageButton5" runat="server" ImageUrl="~/img/iconos/herramientas@2x.png" OnClick="img_conversion_Click" />
                 </div>
-
             </div>
         </div>
     </div>

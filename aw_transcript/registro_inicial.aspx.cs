@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -13,33 +11,30 @@ namespace aw_transcript
         {
             try
             {
-
                 if (!IsPostBack)
                 {
-
                     load_ddl();
-
                 }
                 else
                 {
-
                 }
             }
             catch
             {
-
             }
         }
+
         private void load_ddl()
         {
             ddl_colonia.Items.Clear();
             ddl_colonia.Items.Insert(0, new ListItem("*Colonia", "0"));
-
         }
+
         protected void btn_guardar_Click(object sender, EventArgs e)
         {
             guarda_registro();
         }
+
         private void guarda_registro()
         {
             Guid guid_fempresa = Guid.NewGuid();
@@ -116,15 +111,15 @@ namespace aw_transcript
             lblModalBody.Text = "Datos de administrador y tribunal actualizados con éxito";
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
             upModal.Update();
-
-
         }
+
         protected void btn_cp_Click(object sender, EventArgs e)
         {
             string str_codigo = txt_cp.Text;
 
             datos_sepomex(str_codigo);
         }
+
         private void datos_sepomex(string str_codigo)
         {
             using (db_transcriptEntities db_sepomex = new db_transcriptEntities())
@@ -140,8 +135,6 @@ namespace aw_transcript
 
                 if (tbl_sepomex.Count == 1)
                 {
-
-          
                     txt_municipio.Text = tbl_sepomex[0].D_mnpio;
                     txt_estado.Text = tbl_sepomex[0].d_estado;
                     rfv_colonia.Enabled = true;
@@ -151,7 +144,6 @@ namespace aw_transcript
                 }
                 if (tbl_sepomex.Count > 1)
                 {
- 
                     ddl_colonia.Items.Insert(0, new ListItem("*Colonia", "0"));
 
                     txt_municipio.Text = tbl_sepomex[0].D_mnpio;
@@ -163,7 +155,6 @@ namespace aw_transcript
                 }
                 else if (tbl_sepomex.Count == 0)
                 {
-               
                     ddl_colonia.Items.Clear();
                     ddl_colonia.Items.Insert(0, new ListItem("*Colonia", "0"));
                     txt_municipio.Text = "";
@@ -175,9 +166,9 @@ namespace aw_transcript
                 }
             }
         }
+
         private void limpiar_textbox()
         {
-
             txt_tribunal.Text = "";
             txt_telefono.Text = "";
             txt_email.Text = "";
@@ -197,6 +188,4 @@ namespace aw_transcript
             txt_password.Text = "";
         }
     }
-
-   
 }

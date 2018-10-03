@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -9,20 +7,18 @@ namespace aw_transcript
 {
     public partial class videos_consultados : System.Web.UI.Page
     {
-        static Guid guid_fidusuario;
+        private static Guid guid_fidusuario;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
-
                 if (!IsPostBack)
                 {
                     inf_user();
-
                 }
                 else
                 {
-
                 }
             }
             catch
@@ -30,7 +26,6 @@ namespace aw_transcript
                 Response.Redirect("acceso.aspx");
             }
         }
-
 
         private void inf_user()
         {
@@ -50,7 +45,6 @@ namespace aw_transcript
                                     i_tu.id_tipo_usuario,
                                     i_e.nombre,
                                     i_e.id_tribunal
-
                                 }).FirstOrDefault();
 
                 lbl_name.Text = inf_user.nombres + " " + inf_user.a_paterno + " " + inf_user.a_materno;
@@ -58,10 +52,9 @@ namespace aw_transcript
                 lbl_id_profile_user.Text = inf_user.id_tipo_usuario.ToString();
                 lbl_user_centerCP.Text = inf_user.nombre;
                 lbl_id_centerCP.Text = inf_user.id_tribunal.ToString();
-
-
             }
         }
+
         protected void gv_usuarios_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             gv_files.PageIndex = e.NewPageIndex;
@@ -82,38 +75,30 @@ namespace aw_transcript
                                     inf_u.a_materno,
                                     inf_lv.fecha_registro,
                                     inf_lv.fecha_registro_alt,
-
                                 }).ToList();
 
                 gv_files.DataSource = inf_user;
                 gv_files.DataBind();
                 gv_files.Visible = true;
-
             }
-
         }
+
         protected void cmd_search_Click(object sender, EventArgs e)
         {
             if (rb_internos.Checked == false & rb_externos.Checked == false)
             {
-
                 lblModalTitle.Text = "transcript";
                 lblModalBody.Text = "Favor de seleccionar una opción";
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
                 upModal.Update();
-
             }
             else
             {
-
-
-
                 DateTime str_fdateini = Convert.ToDateTime(txt_dateini.Text);
                 DateTime str_fdatefin = Convert.ToDateTime(txt_datefin.Text);
 
                 if (rb_internos.Checked)
                 {
-
                     using (db_transcriptEntities data_user = new db_transcriptEntities())
                     {
                         var inf_user = (from inf_lv in data_user.inf_material_dep
@@ -129,22 +114,17 @@ namespace aw_transcript
                                             inf_u.a_materno,
                                             inf_lv.fecha_registro,
                                             inf_lv.fecha_registro_alt,
-
                                         }).ToList();
 
                         gv_files.DataSource = inf_user;
                         gv_files.DataBind();
                         gv_files.Visible = true;
-
                     }
                 }
                 else if (rb_externos.Checked)
                 {
                     gv_files.Visible = false;
                 }
-
-
-
             }
         }
 

@@ -11,8 +11,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
     <!-- Bootstrap -->
 
-
-
     <script src="Scripts/jquery-3.3.1.min.js"></script>
 
     <script src="Scripts/bootstrap.min.js"></script>
@@ -75,7 +73,6 @@
                         transcriptsoporte@gmail.com y soportetranscript@gmail.com
                     </p>
                 </div>
-
             </div>
         </div>
     </footer>

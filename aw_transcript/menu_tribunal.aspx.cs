@@ -1,29 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace aw_transcript
 {
     public partial class menu_tribunal : System.Web.UI.Page
     {
-        static Guid guguid_fidusuario;
+        private static Guid guguid_fidusuario;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-
             try
             {
-
                 if (!IsPostBack)
                 {
                     inf_user();
-
                 }
                 else
                 {
-
                 }
             }
             catch
@@ -31,9 +25,9 @@ namespace aw_transcript
                 Response.Redirect("acceso.aspx");
             }
         }
+
         private void inf_user()
         {
-
             guguid_fidusuario = (Guid)(Session["ss_id_user"]);
             //Session.Abandon();
 
@@ -52,7 +46,6 @@ namespace aw_transcript
                                     i_tu.id_tipo_usuario,
                                     i_e.nombre,
                                     i_e.id_tribunal
-
                                 }).FirstOrDefault();
 
                 lbl_fuser.Text = inf_user.nombres + " " + inf_user.a_paterno + " " + inf_user.a_materno;
@@ -64,19 +57,19 @@ namespace aw_transcript
                 int str_id_type_user = inf_user.id_tipo_usuario;
                 switch (str_id_type_user)
                 {
-
                     case 1:
 
-
                         break;
+
                     case 2:
 
-
                         break;
+
                     case 3:
                         div_tribunales.Visible = false;
 
                         break;
+
                     case 4:
                         div_tribunales.Visible = false;
 
@@ -84,6 +77,7 @@ namespace aw_transcript
                 }
             }
         }
+
         protected void img_tribunales_Click(object sender, ImageClickEventArgs e)
         {
             Response.Redirect("tribunal.aspx");

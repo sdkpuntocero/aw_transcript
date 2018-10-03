@@ -1,19 +1,20 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/site.Master" AutoEventWireup="true" CodeBehind="menu_usuarios.aspx.cs" Inherits="aw_transcript.menu_usuarios" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-        <div class="section">
+    <div class="section">
         <div class="container">
             <div class="form-group form-group-sm">
                 <div class="row">
-                      <div class="col-md-1">
-                            <a href="menu.aspx">
-                                <img alt="" src="img/ico_back.png" /></a>
-                        </div>
-                        <div class="col-md-1">
-                            <a href="ctrl_acceso.aspx">
-                                <img alt="" src="img/ico_exit.png" /></a>
-                        </div>
+                    <div class="col-md-1">
+                        <a href="menu.aspx">
+                            <img alt="" src="img/ico_back.png" /></a>
+                    </div>
+                    <div class="col-md-1">
+                        <a href="ctrl_acceso.aspx">
+                            <img alt="" src="img/ico_exit.png" /></a>
+                    </div>
                     <br />
                     <div class="col-md-10">
                         <p class="text-right">
@@ -49,12 +50,12 @@
                     <div class="col-md-3 text-center" id="div_superintendent" runat="server">
                         <h5>
                             <asp:Label ID="lbl_superintendent" runat="server" Text="Supervisor"></asp:Label></h5>
-                        <asp:ImageButton ID="img_superintendent" runat="server" ImageUrl="~/img/iconos/supervisor@2x.png" Width="64" Height="64" OnClick="img_superintendent_Click"  />
+                        <asp:ImageButton ID="img_superintendent" runat="server" ImageUrl="~/img/iconos/supervisor@2x.png" Width="64" Height="64" OnClick="img_superintendent_Click" />
                     </div>
                     <div class="col-md-3 text-center" id="div_operator" runat="server">
                         <h5>
                             <asp:Label ID="lbl_operator" runat="server" Text="Operador"></asp:Label></h5>
-                        <asp:ImageButton ID="img_operator" runat="server" ImageUrl="~/img/iconos/operador@2x.png" Width="64" Height="64" OnClick="img_operator_Click"  />
+                        <asp:ImageButton ID="img_operator" runat="server" ImageUrl="~/img/iconos/operador@2x.png" Width="64" Height="64" OnClick="img_operator_Click" />
                     </div>
                 </div>
             </div>

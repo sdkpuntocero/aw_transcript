@@ -1,8 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/site.Master" AutoEventWireup="true" CodeBehind="menu_tribunal.aspx.cs" Inherits="aw_transcript.menu_tribunal" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <div class="section">
         <div class="container">
             <div class="row">
@@ -39,11 +40,11 @@
             <div class="row animated bounceInUp">
                 <div class="col-md-4 text-center" id="div_tribunales" runat="server">
                     <h5>Tribunal</h5>
-                    <asp:ImageButton ID="img_tribunales" runat="server" ImageUrl="~/img/tribunal.png" Width="64" Height="64"  OnClick="img_tribunales_Click" />
+                    <asp:ImageButton ID="img_tribunales" runat="server" ImageUrl="~/img/tribunal.png" Width="64" Height="64" OnClick="img_tribunales_Click" />
                 </div>
                 <div class="col-md-4 text-center" id="div_juzgado" runat="server">
                     <h5>Juzgados y Salas</h5>
-                    <asp:ImageButton ID="img_juzgado" runat="server" ImageUrl="~/img/salas.png" Width="64" Height="64"  OnClick="img_juzgado_Click" />
+                    <asp:ImageButton ID="img_juzgado" runat="server" ImageUrl="~/img/salas.png" Width="64" Height="64" OnClick="img_juzgado_Click" />
                 </div>
             </div>
         </div>

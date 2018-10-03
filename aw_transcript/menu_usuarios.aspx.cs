@@ -1,28 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace aw_transcript
 {
     public partial class menu_usuarios : System.Web.UI.Page
     {
-        static Guid guid_fidusuario;
+        private static Guid guid_fidusuario;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
-
                 if (!IsPostBack)
                 {
                     inf_user();
-
                 }
                 else
                 {
-
                 }
             }
             catch
@@ -33,9 +28,9 @@ namespace aw_transcript
 
         protected void img_perfil_Click(object sender, ImageClickEventArgs e)
         {
-
             Response.Redirect("perfil.aspx");
         }
+
         private void inf_user()
         {
             guid_fidusuario = (Guid)(Session["ss_id_user"]);
@@ -54,7 +49,6 @@ namespace aw_transcript
                                     i_tu.id_tipo_usuario,
                                     i_e.nombre,
                                     i_e.id_tribunal
-
                                 }).FirstOrDefault();
 
                 lbl_name.Text = inf_user.nombres + " " + inf_user.a_paterno + " " + inf_user.a_materno;
@@ -66,19 +60,19 @@ namespace aw_transcript
                 int str_id_type_user = inf_user.id_tipo_usuario;
                 switch (str_id_type_user)
                 {
-
                     case 1:
 
-
                         break;
+
                     case 2:
 
-
                         break;
+
                     case 3:
                         div_administrador.Visible = false;
 
                         break;
+
                     case 4:
                         div_administrador.Visible = false;
                         div_superintendent.Visible = false;

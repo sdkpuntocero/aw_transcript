@@ -1,33 +1,25 @@
 ﻿using AjaxControlToolkit;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace aw_transcript
 {
     public partial class cargar : System.Web.UI.Page
     {
-        static Guid guid_fidusuario;
+        private static Guid guid_fidusuario;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-
-
             try
             {
-
                 if (!IsPostBack)
                 {
                     inf_user();
-
                 }
                 else
                 {
-
                 }
             }
             catch
@@ -35,6 +27,7 @@ namespace aw_transcript
                 Response.Redirect("ctrl_acceso.aspx");
             }
         }
+
         protected void cmd_save_Click(object sender, EventArgs e)
         {
             string ftpServer = "ftp://www.puntocero.biz/";
@@ -42,10 +35,8 @@ namespace aw_transcript
             string ftppassword = "Fv9dq2&2";
             string fileurl = "C:/Users/Punto Cero/Videos/Patience.mp4";
 
-
             try
             {
-
                 FtpWebRequest ftpClient = (FtpWebRequest)FtpWebRequest.Create(ftpServer + "demo.mp4");
                 ftpClient.Credentials = new NetworkCredential(ftpusername, ftppassword);
                 ftpClient.Method = WebRequestMethods.Ftp.UploadFile;
@@ -71,13 +62,13 @@ namespace aw_transcript
                 string value = uploadResponse.StatusDescription;
                 uploadResponse.Close();
             }
-
             catch (Exception ex)
             {
                 lbl_mnsj.Text = ex.ToString();
             }
             lbl_mnsj.Text = "Carga de archivo con exito";
         }
+
         private void inf_user()
         {
             guid_fidusuario = (Guid)(Session["ss_id_user"]);
@@ -97,7 +88,6 @@ namespace aw_transcript
                                     i_tu.id_tipo_usuario,
                                     i_e.nombre,
                                     i_e.id_tribunal
-
                                 }).FirstOrDefault();
 
                 lbl_name.Text = inf_user.nombres + " " + inf_user.a_paterno + " " + inf_user.a_materno;
@@ -109,28 +99,27 @@ namespace aw_transcript
                 int str_id_type_user = inf_user.id_tipo_usuario;
                 switch (str_id_type_user)
                 {
-
                     case 1:
 
-
                         break;
+
                     case 2:
 
-
                         break;
+
                     case 3:
 
-
                         break;
+
                     case 4:
 
                         break;
                 }
             }
         }
+
         protected void AjaxFileUpload1_UploadComplete(object sender, AjaxFileUploadEventArgs e)
         {
-
             string str_filename, str_field;
             string path = Server.MapPath("~/videos/") + e.FileName;
             str_filename = e.FileName;
@@ -141,7 +130,6 @@ namespace aw_transcript
 
             //using (var insert_material = new db_transcriptEntities())
             //{
-
             //    var items_user = new inf_material
             //    {
             //        expediente = "00001",
@@ -166,14 +154,13 @@ namespace aw_transcript
             lbl_mnsj.Text = "Videa a mp4 con Exito";
             //Session["ss_id_user"] = id_user;
         }
+
         protected void AjaxFileUpload1_UploadCompleteAll(object sender, AjaxFileUploadCompleteAllEventArgs e)
         {
-
         }
+
         protected void AjaxFileUpload1_UploadStart(object sender, AjaxFileUploadStartEventArgs e)
         {
-
-
         }
     }
 }

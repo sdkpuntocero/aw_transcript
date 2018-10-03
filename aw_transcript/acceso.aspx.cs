@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -9,7 +7,7 @@ namespace aw_transcript
 {
     public partial class acceso : System.Web.UI.Page
     {
-        static Guid str_id_user;
+        private static Guid str_id_user;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -19,7 +17,6 @@ namespace aw_transcript
             }
             else
             {
-
             }
         }
 

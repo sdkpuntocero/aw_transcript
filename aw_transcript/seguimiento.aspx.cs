@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -11,22 +9,19 @@ namespace aw_transcript
 {
     public partial class seguimiento : System.Web.UI.Page
     {
-        static string str_session, str_video;
-        static Guid guid_fidusuario, guid_fidcentro;
+        private static string str_session, str_video;
+        private static Guid guid_fidusuario, guid_fidcentro;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
-
                 if (!IsPostBack)
                 {
                     //inf_user();
-
                 }
                 else
                 {
-
                 }
             }
             catch
@@ -34,6 +29,7 @@ namespace aw_transcript
                 Response.Redirect("ctrl_acceso.aspx");
             }
         }
+
         protected void gv_files_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -50,7 +46,6 @@ namespace aw_transcript
                                       where inf_m.id_material == customerId
                                       select new
                                       {
-
                                           inf_m.sesion,
                                           inf_m.archivo,
                                           inf_m.duracion,
@@ -58,14 +53,12 @@ namespace aw_transcript
                                           inf_em.desc_estatus_material,
                                           inf_m.id_material,
                                           inf_m.id_material_ext
-
                                       }).ToList();
                     gv_material_ext.DataSource = i_material;
                     gv_material_ext.DataBind();
                     gv_material_ext.Visible = true;
                     //if (gv_material_ext.Rows.Count == 0)
                     //{
-
                     //}
                     //else
                     //{
@@ -73,7 +66,6 @@ namespace aw_transcript
                     //    string _EstatusExt = gv_material_ext.Rows[1].Cells[4].Text;
                     //    if (_EstatusExt == "ERROR")
                     //    {
-
                     //        //btnButton_ext.Text = "CARGAR";
                     //        //btnButton_ext.Enabled = true;
                     //    }
@@ -100,7 +92,6 @@ namespace aw_transcript
                     //    }
 
                     //}
-
                 }
             }
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -109,11 +100,9 @@ namespace aw_transcript
                 Button btnButton_v = (Button)e.Row.FindControl("btn_video");
                 if (e.Row.Cells[9].Text == "ERROR")
                 {
-
                     btnButton.Text = "CARGAR";
                     btnButton.Enabled = true;
                 }
-
                 else if (e.Row.Cells[9].Text == "ACTIVO")
                 {
                     btnButton.Text = "PDF";
@@ -148,9 +137,7 @@ namespace aw_transcript
         {
             try
             {
-
                 GridViewRow gvr = (GridViewRow)(((Button)e.CommandSource).NamingContainer);
-
 
                 string status = gvr.Cells[5].Text.ToString().Trim();
                 int id_sessionf = int.Parse(gvr.Cells[0].Text);
@@ -173,17 +160,13 @@ namespace aw_transcript
                     str_sessionf = items_mat.sesion;
                 }
 
-
                 str_session = gvr.Cells[1].Text;
                 str_video = gvr.Cells[2].Text + ".mp4";
                 var two_user = new int?[] { 1, 3, 4, 5, 8, 9 };
 
                 switch (status)
                 {
-
-
                     case "ACTIVO":
-
 
                         using (var edm_material = new db_transcriptEntities())
                         {
@@ -229,6 +212,7 @@ namespace aw_transcript
                         }
 
                         break;
+
                     case "ERROR":
 
                         using (var data_mat = new db_transcriptEntities())
@@ -244,6 +228,7 @@ namespace aw_transcript
 
                         flist_user(two_user);
                         break;
+
                     case "NUEVO":
 
                         using (var data_mat = new db_transcriptEntities())
@@ -259,7 +244,6 @@ namespace aw_transcript
 
                         flist_user(two_user);
                         break;
-
                 }
             }
             catch
@@ -272,11 +256,9 @@ namespace aw_transcript
             Button btnButton_v = (Button)e.Row.FindControl("btn_video_ext");
             if (e.Row.Cells[5].Text == "ERROR")
             {
-
                 btnButton.Text = "CARGAR";
                 btnButton.Enabled = true;
             }
-
             else if (e.Row.Cells[5].Text == "ACTIVO")
             {
                 btnButton.Text = "PDF";
@@ -299,12 +281,11 @@ namespace aw_transcript
                 btnButton.Text = "";
                 btnButton.Enabled = false;
             }
-
         }
 
         public String MyNewRow(object idmaterial)
         {
-            /* 
+            /*
                 * 1. Close current cell in our example phone </TD>
                 * 2. Close Current Row </TR>
                 * 3. Cretae new Row with ID and class <TR id='...' style='...'>
@@ -315,6 +296,7 @@ namespace aw_transcript
             return String.Format(@"</td></tr><tr id ='tr{0}' style='collapsed-row'>
                <td></td><td colspan='100' style='padding:0px; margin:0px;'>", idmaterial);
         }
+
         protected void chk_OnCheckedChanged(object sender, EventArgs e)
         {
             foreach (GridViewRow row in gv_files.Rows)
@@ -334,15 +316,13 @@ namespace aw_transcript
                     }
                 }
             }
-
         }
+
         protected void gv_files_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             try
             {
-
                 GridViewRow gvr = (GridViewRow)(((Button)e.CommandSource).NamingContainer);
-
 
                 string status = gvr.Cells[9].Text.ToString().Trim();
 
@@ -352,10 +332,7 @@ namespace aw_transcript
 
                 switch (status)
                 {
-
-
                     case "ACTIVO":
-
 
                         using (var edm_material = new db_transcriptEntities())
                         {
@@ -401,6 +378,7 @@ namespace aw_transcript
                         }
 
                         break;
+
                     case "ERROR":
 
                         using (var data_mat = new db_transcriptEntities())
@@ -416,6 +394,7 @@ namespace aw_transcript
 
                         flist_user(two_user);
                         break;
+
                     case "NUEVO":
 
                         using (var data_mat = new db_transcriptEntities())
@@ -431,12 +410,12 @@ namespace aw_transcript
 
                         flist_user(two_user);
                         break;
-
                 }
             }
             catch
             { }
         }
+
         private Control CrearControlVideo(string str_namefile)
         {
             StringBuilder sa = new StringBuilder();
@@ -458,6 +437,7 @@ namespace aw_transcript
 
             return new LiteralControl(sa.ToString());
         }
+
         protected void img_pdf_Click(object sender, ImageClickEventArgs e)
         {
             foreach (GridViewRow row in gv_files.Rows)
@@ -469,7 +449,6 @@ namespace aw_transcript
                     {
                         if (row.Cells[8].Text == "INACTIVO")
                         {
-
                         }
                         else
                         {
@@ -480,13 +459,12 @@ namespace aw_transcript
                             iframe_pdf.Visible = true;
                             iframe_pdf.Attributes["src"] = d_pdf;
                             UpdatePanel2.Update();
-
                         }
                     }
                 }
             }
-
         }
+
         protected void cmd_search_Click(object sender, EventArgs e)
         {
             var two_user = new int?[] { 1, 4 };
@@ -495,7 +473,6 @@ namespace aw_transcript
 
         private void flist_user(int?[] str_idload)
         {
-
             string str_dateini = txt_dateini.Text;
             string str_datefin = txt_datefin.Text;
             string sessionf = txt_expedient.Text;
@@ -525,16 +502,12 @@ namespace aw_transcript
                                       inf_m.fecha_registro,
                                       inf_em.desc_estatus_material,
                                       inf_m.id_material
-
                                   }).ToList();
 
                 gv_files.DataSource = i_material;
                 gv_files.DataBind();
                 gv_files.Visible = true;
-
-
             }
-
         }
     }
 }

@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -10,20 +8,18 @@ namespace aw_transcript
 {
     public partial class programar_depuracion : System.Web.UI.Page
     {
-        static Guid guid_fidusuario, guid_fidcentro;
+        private static Guid guid_fidusuario, guid_fidcentro;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
-
                 if (!IsPostBack)
                 {
                     inf_user();
-
                 }
                 else
                 {
-
                 }
             }
             catch
@@ -31,6 +27,7 @@ namespace aw_transcript
                 Response.Redirect("acceso.aspx");
             }
         }
+
         private void inf_user()
         {
             guid_fidusuario = (Guid)(Session["ss_id_user"]);
@@ -50,7 +47,6 @@ namespace aw_transcript
                                      i_tu.id_tipo_usuario,
                                      i_e.nombre,
                                      i_e.id_tribunal
-
                                  }).FirstOrDefault();
 
                 lbl_fuser.Text = i_usuario.nombres + " " + i_usuario.a_paterno + " " + i_usuario.a_materno;
@@ -58,7 +54,6 @@ namespace aw_transcript
                 lbl_idprofileuser.Text = i_usuario.id_tipo_usuario.ToString();
                 lbl_centername.Text = i_usuario.nombre;
                 guid_fidcentro = i_usuario.id_tribunal;
-
             }
 
             using (db_transcriptEntities edm_fecha_transf = new db_transcriptEntities())
@@ -72,21 +67,21 @@ namespace aw_transcript
                 }
                 else
                 {
-
                     lblModalTitle.Text = "transcript";
                     lblModalBody.Text = "Sin registro, favor de agregar uno";
                     ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
                     upModal.Update();
                 }
             }
-
         }
+
         protected void rb_add_dayvideos_CheckedChanged(object sender, EventArgs e)
         {
             rb_edit_dayvideos.Checked = false;
             txt_days.Text = "";
             div_infdayvideos.Visible = true;
         }
+
         protected void rb_edit_dayvideos_CheckedChanged(object sender, EventArgs e)
         {
             rb_add_dayvideos.Checked = false;
@@ -96,8 +91,6 @@ namespace aw_transcript
             gv_dayvideosf.Visible = false;
             txt_days.Text = "";
 
-
-
             using (db_transcriptEntities data_user = new db_transcriptEntities())
             {
                 var inf_user = (from u in data_user.inf_caducidad_videos
@@ -106,13 +99,11 @@ namespace aw_transcript
                                     u.id_caducidad_videos,
                                     u.dias_caducidad,
                                     u.fecha_registro
-
                                 }).ToList();
 
                 if (inf_user.Count == 0)
                 {
                     rb_edit_dayvideos.Checked = false;
-
 
                     lblModalTitle.Text = "transcript";
                     lblModalBody.Text = "Sin registro, favor de agregar uno";
@@ -127,6 +118,7 @@ namespace aw_transcript
                 }
             }
         }
+
         public int id_accion()
         {
             if (rb_add_dayvideos.Checked)
@@ -146,6 +138,7 @@ namespace aw_transcript
                 return 4;
             }
         }
+
         protected void cmd_save_days_Click(object sender, EventArgs e)
         {
             int str_ndias = Convert.ToInt32(txt_days.Text);
@@ -170,7 +163,6 @@ namespace aw_transcript
                         id_usuario = guid_fidusuario,
                         id_tribunal = guid_fidcentro,
                         fecha_registro = DateTime.Now
-
                     };
                     edm_cadvideos.inf_caducidad_videos.Add(i_cadvideos);
                     edm_cadvideos.SaveChanges();
@@ -182,7 +174,6 @@ namespace aw_transcript
 
                     if (ii_fecha_transf.Count == 0)
                     {
-
                     }
                     else
                     {
@@ -194,7 +185,6 @@ namespace aw_transcript
                                 id_caducidad_videos = ii_fecha_transf[0].id_caducidad_videos,
                                 id_tipo_accion = id_accion(),
                                 fecha_registro = DateTime.Now,
-
                             };
                             insert_user.inf_caducidad_videos_dep.Add(items_user);
                             insert_user.SaveChanges();
@@ -208,11 +198,9 @@ namespace aw_transcript
                                        where u.dias_caducidad == str_ndias
                                        select new
                                        {
-
                                            u.id_caducidad_videos,
                                            u.dias_caducidad,
                                            u.fecha_registro
-
                                        }).ToList();
 
                     gv_dayvideosf.DataSource = i_cadvideos;
@@ -226,7 +214,6 @@ namespace aw_transcript
                 lblModalBody.Text = "Dias de respaldo, agregado con éxito";
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
                 upModal.Update();
-
             }
             else
             {
@@ -255,7 +242,6 @@ namespace aw_transcript
 
                                 if (ii_fecha_transf.Count == 0)
                                 {
-
                                 }
                                 else
                                 {
@@ -267,7 +253,6 @@ namespace aw_transcript
                                             id_caducidad_videos = ii_fecha_transf[0].id_caducidad_videos,
                                             id_tipo_accion = id_accion(),
                                             fecha_registro = DateTime.Now,
-
                                         };
                                         insert_user.inf_caducidad_videos_dep.Add(items_user);
                                         insert_user.SaveChanges();
@@ -289,7 +274,6 @@ namespace aw_transcript
                                                        u.id_caducidad_videos,
                                                        u.dias_caducidad,
                                                        u.fecha_registro
-
                                                    }).ToList();
 
                                 gv_dayvideos.DataSource = i_cadvideos;
@@ -299,14 +283,11 @@ namespace aw_transcript
                         }
                     }
                 }
-
-
             }
-
         }
+
         protected void chkselect_dayvideos(object sender, EventArgs e)
         {
-
             foreach (GridViewRow row in gv_dayvideos.Rows)
             {
                 if (row.RowType == DataControlRowType.DataRow)
@@ -326,8 +307,6 @@ namespace aw_transcript
                                                    u.id_caducidad_videos,
                                                    u.dias_caducidad,
                                                    u.fecha_registro
-
-
                                                }).FirstOrDefault();
 
                             txt_days.Text = i_cadvideos.dias_caducidad.ToString();
@@ -336,7 +315,6 @@ namespace aw_transcript
                     else
                     {
                         row.BackColor = Color.White;
-
                     }
                 }
             }

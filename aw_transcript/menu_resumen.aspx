@@ -1,8 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/site.Master" AutoEventWireup="true" CodeBehind="menu_resumen.aspx.cs" Inherits="aw_transcript.menu_resumen" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-            <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <div class="section">
         <div class="container">
             <div class="row">
@@ -39,7 +40,7 @@
             <div class="row animated bounceInUp">
                 <div class="col-md-12 text-center" id="div_tracing" runat="server">
                     <h5>Videos Consultados</h5>
-                    <asp:ImageButton ID="img_summary_video" runat="server" ImageUrl="~/img/iconos/resumen estadisticas@2x.png" Width="64" Height="64" OnClick="img_summary_video_Click"  />
+                    <asp:ImageButton ID="img_summary_video" runat="server" ImageUrl="~/img/iconos/resumen estadisticas@2x.png" Width="64" Height="64" OnClick="img_summary_video_Click" />
                 </div>
             </div>
         </div>

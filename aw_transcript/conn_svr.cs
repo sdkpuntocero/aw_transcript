@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
+﻿using System.Data.SqlClient;
 
 namespace aw_transcript
 {
@@ -10,7 +6,6 @@ namespace aw_transcript
     {
         public static string strconn_sql
         {
-
             get
             {
                 SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
@@ -30,7 +25,6 @@ namespace aw_transcript
                 ////conn_string.ConnectionTimeout = 0;
 
                 return builder.ConnectionString;
-
             }
         }
     }

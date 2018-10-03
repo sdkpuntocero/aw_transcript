@@ -1,29 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace aw_transcript
 {
     public partial class menu : System.Web.UI.Page
     {
-        static Guid guid_fidusuario;
+        private static Guid guid_fidusuario;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-
             try
             {
-
                 if (!IsPostBack)
                 {
                     inf_user();
-
                 }
                 else
                 {
-
                 }
             }
             catch
@@ -31,9 +25,9 @@ namespace aw_transcript
                 Response.Redirect("acceso.aspx");
             }
         }
+
         private void inf_user()
         {
-
             guid_fidusuario = (Guid)(Session["ss_id_user"]);
             //Session.Abandon();
 
@@ -52,7 +46,6 @@ namespace aw_transcript
                                     i_tu.id_tipo_usuario,
                                     i_e.nombre,
                                     i_e.id_tribunal
-
                                 }).FirstOrDefault();
 
                 lbl_fuser.Text = inf_user.nombres + " " + inf_user.a_paterno + " " + inf_user.a_materno;
@@ -64,19 +57,18 @@ namespace aw_transcript
                 int str_id_type_user = inf_user.id_tipo_usuario;
                 switch (str_id_type_user)
                 {
-
                     case 1:
 
-
                         break;
+
                     case 2:
 
-
                         break;
+
                     case 3:
 
-
                         break;
+
                     case 4:
 
                         //div_tracing.Visible = false;
@@ -87,10 +79,12 @@ namespace aw_transcript
                 }
             }
         }
+
         protected void img_control_users_Click(object sender, ImageClickEventArgs e)
         {
             Response.Redirect("menu_usuarios.aspx");
         }
+
         protected void img_control_centers_Click(object sender, ImageClickEventArgs e)
         {
             Response.Redirect("menu_tribunal.aspx");

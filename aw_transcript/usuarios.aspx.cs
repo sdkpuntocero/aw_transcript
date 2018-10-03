@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -10,20 +8,18 @@ namespace aw_transcript
 {
     public partial class usuarios : System.Web.UI.Page
     {
-        static Guid guid_fidusuario, guid_fidcentro;
+        private static Guid guid_fidusuario, guid_fidcentro;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
-
                 if (!IsPostBack)
                 {
                     inf_user();
-
                 }
                 else
                 {
-
                 }
             }
             catch
@@ -52,7 +48,6 @@ namespace aw_transcript
                                     i_tu.id_tipo_usuario,
                                     i_e.nombre,
                                     i_e.id_tribunal
-
                                 }).FirstOrDefault();
 
                 lbl_fuser.Text = inf_user.nombres + " " + inf_user.a_paterno + " " + inf_user.a_materno;
@@ -63,7 +58,6 @@ namespace aw_transcript
 
                 switch (save_user)
                 {
-
                     case 2:
                         lbl_reg.Text = "Registro de Administrador";
                         Image1.Attributes["src"] = "/img/iconos/administrador@2x.png";
@@ -80,9 +74,9 @@ namespace aw_transcript
                                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
                                 upModal.Update();
                             }
-
                         }
                         break;
+
                     case 3:
                         lbl_reg.Text = "Registro de Supervisor";
                         Image1.Attributes["src"] = "/img/iconos/supervisor@2x.png";
@@ -99,9 +93,9 @@ namespace aw_transcript
                                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
                                 upModal.Update();
                             }
-
                         }
                         break;
+
                     case 4:
                         lbl_reg.Text = "Registro de Operador";
                         Image1.Attributes["src"] = "/img/iconos/operador@2x.png";
@@ -118,14 +112,12 @@ namespace aw_transcript
                                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
                                 upModal.Update();
                             }
-
                         }
                         break;
                 }
             }
-
-     
         }
+
         protected void cmd_save_Click(object sender, EventArgs e)
         {
             if (rb_add.Checked == false & rb_edit.Checked == false & rb_del.Checked == false)
@@ -145,7 +137,6 @@ namespace aw_transcript
 
                 if (rb_add.Checked)
                 {
-
                     try
                     {
                         string str_filter_code;
@@ -160,7 +151,6 @@ namespace aw_transcript
 
                         if (str_codeuser == str_filter_code)
                         {
-
                             txt_code_user.Text = "";
                             Mensaje("Usuario ya existe en la base, agregar otro usuario.");
                         }
@@ -196,7 +186,6 @@ namespace aw_transcript
                                 id_tipo_accion = id_accion(),
                                 id_usuario_alt = str_iduser,
                                 fecha_registro = DateTime.Now,
-
                             };
                             insert_user.inf_usuarios_dep.Add(items_user);
                             insert_user.SaveChanges();
@@ -252,7 +241,6 @@ namespace aw_transcript
                                             id_tipo_accion = id_accion(),
                                             id_usuario_alt = str_iduser,
                                             fecha_registro = DateTime.Now,
-
                                         };
                                         insert_user.inf_usuarios_dep.Add(items_user);
                                         insert_user.SaveChanges();
@@ -307,7 +295,6 @@ namespace aw_transcript
                                                     id_tipo_accion = id_accion(),
                                                     id_usuario_alt = str_iduser,
                                                     fecha_registro = DateTime.Now,
-
                                                 };
                                                 insert_user.inf_usuarios_dep.Add(items_userb);
                                                 insert_user.SaveChanges();
@@ -328,7 +315,6 @@ namespace aw_transcript
 
                                             if (str_codeuser == str_filter_code)
                                             {
-
                                                 txt_code_user.Text = "";
                                                 Mensaje("Usuario ya existe en la base, agregar otro usuario.");
                                             }
@@ -339,11 +325,8 @@ namespace aw_transcript
                         }
                     }
                 }
-
                 else if (rb_del.Checked)
                 {
-
-
                     foreach (GridViewRow row in gv_usuarios.Rows)
                     {
                         if (row.RowType == DataControlRowType.DataRow)
@@ -379,7 +362,6 @@ namespace aw_transcript
                                         id_tipo_accion = id_accion(),
                                         id_usuario_alt = str_iduser,
                                         fecha_registro = DateTime.Now,
-
                                     };
                                     insert_user.inf_usuarios_dep.Add(items_user);
                                     insert_user.SaveChanges();
@@ -399,6 +381,7 @@ namespace aw_transcript
                 }
             }
         }
+
         public int id_accion()
 
         {
@@ -419,6 +402,7 @@ namespace aw_transcript
                 return 4;
             }
         }
+
         private void flist_user(int?[] id_flist_user)
         {
             if (lbl_idprofileuser.Text == "2")
@@ -439,7 +423,6 @@ namespace aw_transcript
                                         u.nombres,
                                         u.a_paterno,
                                         u.a_materno
-
                                     }).ToList();
 
                     gv_usuarios.DataSource = inf_user;
@@ -464,7 +447,6 @@ namespace aw_transcript
                                         u.nombres,
                                         u.a_paterno,
                                         u.a_materno
-
                                     }).ToList();
 
                     gv_usuarios.DataSource = inf_user;
@@ -475,9 +457,9 @@ namespace aw_transcript
 
             if (rb_edit.Checked)
             {
-
             }
         }
+
         protected void rb_add_CheckedChanged(object sender, EventArgs e)
         {
             rb_edit.Checked = false;
@@ -486,6 +468,7 @@ namespace aw_transcript
             txt_search.Visible = false;
             cmd_search.Visible = false;
         }
+
         protected void rb_edit_CheckedChanged(object sender, EventArgs e)
         {
             rb_add.Checked = false;
@@ -496,6 +479,7 @@ namespace aw_transcript
             var two_user = new int?[] { save_user };
             flist_user(two_user);
         }
+
         protected void rb_drop_CheckedChanged(object sender, EventArgs e)
         {
             rb_edit.Checked = false;
@@ -507,6 +491,7 @@ namespace aw_transcript
             var two_user = new int?[] { save_user };
             flist_user(two_user);
         }
+
         protected void rb_del_CheckedChanged(object sender, EventArgs e)
         {
             rb_edit.Checked = false;
@@ -518,6 +503,7 @@ namespace aw_transcript
             var two_user = new int?[] { save_user };
             flist_user(two_user);
         }
+
         private void clean_data()
         {
             txt_search.Text = "";
@@ -527,6 +513,7 @@ namespace aw_transcript
             txt_code_user.Text = "";
             txt_password.Text = "";
         }
+
         protected void chk_OnCheckedChanged(object sender, EventArgs e)
         {
             Guid guid_fidusuario;
@@ -564,9 +551,7 @@ namespace aw_transcript
                                                     u.a_materno,
                                                     u.codigo_usuario,
                                                     u.clave
-
                                                 }).FirstOrDefault();
-
 
                                 txt_name_user.Text = inf_user.nombres;
                                 txt_apater.Text = inf_user.a_paterno;
@@ -588,9 +573,7 @@ namespace aw_transcript
                                                     u.a_materno,
                                                     u.codigo_usuario,
                                                     u.clave
-
                                                 }).FirstOrDefault();
-
 
                                 txt_name_user.Text = inf_user.nombres;
                                 txt_apater.Text = inf_user.a_paterno;
@@ -607,6 +590,7 @@ namespace aw_transcript
                 }
             }
         }
+
         protected void cmd_search_Click(object sender, EventArgs e)
         {
             string str_userb = txt_search.Text;
@@ -630,7 +614,6 @@ namespace aw_transcript
                                     u.nombres,
                                     u.a_paterno,
                                     u.a_materno
-
                                 }).ToList();
 
                 if (inf_user.Count == 0)
@@ -643,8 +626,6 @@ namespace aw_transcript
                     lblModalBody.Text = "Usuario no exite o tiene un perfil diferente";
                     ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
                     upModal.Update();
-
-
                 }
                 else
                 {
@@ -654,6 +635,7 @@ namespace aw_transcript
                 }
             }
         }
+
         private void Mensaje(string contenido)
         {
             lblModalTitle.Text = "transcript";

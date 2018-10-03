@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -13,12 +11,12 @@ namespace aw_transcript
 {
     public partial class juzgados_salas : System.Web.UI.Page
     {
-        static Guid guid_fidusuario, guid_fidcentro, guid_ftribunal, guid_idjuzgado, guid_nsala, guid_njuzgado;
+        private static Guid guid_fidusuario, guid_fidcentro, guid_ftribunal, guid_idjuzgado, guid_nsala, guid_njuzgado;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
-
                 if (!IsPostBack)
                 {
                     inf_user();
@@ -26,7 +24,6 @@ namespace aw_transcript
                 }
                 else
                 {
-
                 }
             }
             catch
@@ -34,6 +31,7 @@ namespace aw_transcript
                 Response.Redirect("acceso.aspx");
             }
         }
+
         private void inf_user()
         {
             guid_fidusuario = (Guid)(Session["ss_id_user"]);
@@ -53,7 +51,6 @@ namespace aw_transcript
                                      i_tu.id_tipo_usuario,
                                      i_e.nombre,
                                      i_e.id_tribunal
-
                                  }).FirstOrDefault();
 
                 lbl_fuser.Text = i_usuario.nombres + " " + i_usuario.a_paterno + " " + i_usuario.a_materno;
@@ -61,7 +58,6 @@ namespace aw_transcript
                 lbl_idprofileuser.Text = i_usuario.id_tipo_usuario.ToString();
                 lbl_centername.Text = i_usuario.nombre;
                 guid_fidcentro = i_usuario.id_tribunal;
-
             }
 
             using (db_transcriptEntities edm_fecha_transf = new db_transcriptEntities())
@@ -85,10 +81,7 @@ namespace aw_transcript
                     txt_buscar_juzgado.Visible = false;
                     btn_buscar_juzgado.Visible = false;
 
-
-
                     chkbox_sala.Visible = false;
-
 
                     using (db_transcriptEntities data_user = new db_transcriptEntities())
                     {
@@ -103,7 +96,6 @@ namespace aw_transcript
                                             i_u.localidad,
                                             i_u.numero,
                                             i_u.fecha_registro,
-
                                         }).ToList();
 
                         gv_juzgado.DataSource = inf_user;
@@ -112,8 +104,8 @@ namespace aw_transcript
                     }
                 }
             }
-
         }
+
         private void load_ddl()
         {
             using (db_transcriptEntities m_especializa = new db_transcriptEntities())
@@ -128,8 +120,8 @@ namespace aw_transcript
             }
             ddl_especializa.Items.Insert(0, new ListItem("Seleccionar", "0"));
             ddl_colonia.Items.Insert(0, new ListItem("Seleccionar", "0"));
-
         }
+
         public int id_accion_juzgado()
         {
             if (rb_agregar_juzgado.Checked)
@@ -149,6 +141,7 @@ namespace aw_transcript
                 return 4;
             }
         }
+
         public int id_accion_salas()
         {
             if (rb_agregar_sala.Checked)
@@ -168,27 +161,24 @@ namespace aw_transcript
                 return 4;
             }
         }
+
         public int valida_sala()
         {
             if (string.IsNullOrEmpty(txt_sala.Text) && string.IsNullOrEmpty(txt_ip.Text) && string.IsNullOrEmpty(txt_user_ip.Text) && string.IsNullOrEmpty(txt_pass_ip.Text) && string.IsNullOrEmpty(txt_path_videos.Text) && string.IsNullOrEmpty(txt_user_path.Text) && string.IsNullOrEmpty(txt_pass_path.Text))
             {
                 return 1;
-
             }
             else if (string.IsNullOrEmpty(txt_sala.Text) == false && string.IsNullOrEmpty(txt_ip.Text) == false && string.IsNullOrEmpty(txt_user_ip.Text) && string.IsNullOrEmpty(txt_pass_ip.Text) && string.IsNullOrEmpty(txt_path_videos.Text) && string.IsNullOrEmpty(txt_user_path.Text) && string.IsNullOrEmpty(txt_pass_path.Text))
             {
                 return 2;
-
             }
             else if (string.IsNullOrEmpty(txt_sala.Text) == false && string.IsNullOrEmpty(txt_ip.Text) == false && string.IsNullOrEmpty(txt_user_ip.Text) == false && string.IsNullOrEmpty(txt_pass_ip.Text) && string.IsNullOrEmpty(txt_path_videos.Text) && string.IsNullOrEmpty(txt_user_path.Text) && string.IsNullOrEmpty(txt_pass_path.Text))
             {
                 return 2;
-
             }
             else if (string.IsNullOrEmpty(txt_sala.Text) == false && string.IsNullOrEmpty(txt_ip.Text) == false && string.IsNullOrEmpty(txt_user_ip.Text) == false && string.IsNullOrEmpty(txt_pass_ip.Text) == false && string.IsNullOrEmpty(txt_path_videos.Text) && string.IsNullOrEmpty(txt_user_path.Text) && string.IsNullOrEmpty(txt_pass_path.Text))
             {
                 return 2;
-
             }
             else if (string.IsNullOrEmpty(txt_sala.Text) == false && string.IsNullOrEmpty(txt_ip.Text) && string.IsNullOrEmpty(txt_user_ip.Text) && string.IsNullOrEmpty(txt_pass_ip.Text) && string.IsNullOrEmpty(txt_path_videos.Text) == false && string.IsNullOrEmpty(txt_user_path.Text) && string.IsNullOrEmpty(txt_pass_path.Text))
             {
@@ -198,54 +188,44 @@ namespace aw_transcript
             {
                 return 3;
             }
-
             else if (string.IsNullOrEmpty(txt_sala.Text) == false && string.IsNullOrEmpty(txt_ip.Text) && string.IsNullOrEmpty(txt_user_ip.Text) && string.IsNullOrEmpty(txt_pass_ip.Text) && string.IsNullOrEmpty(txt_path_videos.Text) == false && string.IsNullOrEmpty(txt_user_path.Text) == false && string.IsNullOrEmpty(txt_pass_path.Text) == false)
             {
                 return 3;
             }
-
             else if (string.IsNullOrEmpty(txt_sala.Text) == false && string.IsNullOrEmpty(txt_ip.Text) == false && string.IsNullOrEmpty(txt_user_ip.Text) && string.IsNullOrEmpty(txt_pass_ip.Text) && string.IsNullOrEmpty(txt_path_videos.Text) == false && string.IsNullOrEmpty(txt_user_path.Text) && string.IsNullOrEmpty(txt_pass_path.Text))
             {
                 return 4;
-
             }
             else if (string.IsNullOrEmpty(txt_sala.Text) == false && string.IsNullOrEmpty(txt_ip.Text) == false && string.IsNullOrEmpty(txt_user_ip.Text) == false && string.IsNullOrEmpty(txt_pass_ip.Text) == false && string.IsNullOrEmpty(txt_path_videos.Text) == false && string.IsNullOrEmpty(txt_user_path.Text) == false && string.IsNullOrEmpty(txt_pass_path.Text))
             {
                 return 4;
-
             }
             else if (string.IsNullOrEmpty(txt_sala.Text) == false && string.IsNullOrEmpty(txt_ip.Text) == false && string.IsNullOrEmpty(txt_user_ip.Text) == false && string.IsNullOrEmpty(txt_pass_ip.Text) && string.IsNullOrEmpty(txt_path_videos.Text) == false && string.IsNullOrEmpty(txt_user_path.Text) && string.IsNullOrEmpty(txt_pass_path.Text))
             {
                 return 4;
-
             }
             else if (string.IsNullOrEmpty(txt_sala.Text) == false && string.IsNullOrEmpty(txt_ip.Text) == false && string.IsNullOrEmpty(txt_user_ip.Text) == false && string.IsNullOrEmpty(txt_pass_ip.Text) == false && string.IsNullOrEmpty(txt_path_videos.Text) == false && string.IsNullOrEmpty(txt_user_path.Text) == false && string.IsNullOrEmpty(txt_pass_path.Text) == false)
             {
                 return 4;
-
             }
             else if (string.IsNullOrEmpty(txt_sala.Text) == false && string.IsNullOrEmpty(txt_ip.Text) == false && string.IsNullOrEmpty(txt_user_ip.Text) == false && string.IsNullOrEmpty(txt_pass_ip.Text) == false && string.IsNullOrEmpty(txt_path_videos.Text) == false && string.IsNullOrEmpty(txt_user_path.Text) == false && string.IsNullOrEmpty(txt_pass_path.Text) == false)
             {
                 return 4;
-
             }
             else if (string.IsNullOrEmpty(txt_sala.Text) == false && string.IsNullOrEmpty(txt_ip.Text) == false && string.IsNullOrEmpty(txt_user_ip.Text) == false && string.IsNullOrEmpty(txt_pass_ip.Text) == false && string.IsNullOrEmpty(txt_path_videos.Text) == false && string.IsNullOrEmpty(txt_user_path.Text) == false && string.IsNullOrEmpty(txt_pass_path.Text) == false)
             {
                 return 4;
-
             }
             if (string.IsNullOrEmpty(txt_sala.Text) == false && string.IsNullOrEmpty(txt_ip.Text) && string.IsNullOrEmpty(txt_user_ip.Text) && string.IsNullOrEmpty(txt_pass_ip.Text) && string.IsNullOrEmpty(txt_path_videos.Text) && string.IsNullOrEmpty(txt_user_path.Text) && string.IsNullOrEmpty(txt_pass_path.Text))
             {
                 return 5;
-
             }
             else
             {
                 return 0;
-
             }
-
         }
+
         protected void chkbox_sala_CheckedChanged(object sender, EventArgs e)
         {
             if (chkbox_sala.Checked == true)
@@ -268,8 +248,6 @@ namespace aw_transcript
                 txt_pass_path.Enabled = true;
                 btn_guarda_sala.Enabled = true;
 
-
-
                 rb_editar_sala.Checked = false;
                 rb_eliminar_sala.Checked = false;
                 txt_sala.Text = null;
@@ -285,7 +263,6 @@ namespace aw_transcript
                 txt_pass_path.Text = null;
 
                 rfv_sala.Enabled = true;
-
             }
             else
             {
@@ -331,19 +308,15 @@ namespace aw_transcript
         {
             if (rb_agregar_sala.Checked == false & rb_editar_sala.Checked == false & rb_eliminar_sala.Checked == false)
             {
-
                 lblModalTitle.Text = "transcript";
                 lblModalBody.Text = "Favor de seleccionar una acción";
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
                 upModal.Update();
-
             }
             else
             {
-
                 if (rb_agregar_sala.Checked == true)
                 {
-
                     if (valida_sala() == 5)
                     {
                         guarda_sala();
@@ -364,12 +337,9 @@ namespace aw_transcript
                     {
                         guarda_sala();
                     }
-
-
                 }
                 else if (rb_editar_sala.Checked == true)
                 {
-
                     int add_j = 0;
                     foreach (GridViewRow row in gv_sala.Rows)
                     {
@@ -379,26 +349,21 @@ namespace aw_transcript
                             if (chkRow.Checked)
                             {
                                 add_j = add_j + 1;
-
                             }
-                  
-                            
                         }
                     }
                     if (add_j != 0)
                     {
                         guarda_sala();
                     }
-   
-
                 }
                 else if (rb_eliminar_sala.Checked == true)
                 {
-
                     guarda_sala();
                 }
             }
         }
+
         private void guarda_sala()
         {
             guid_nsala = Guid.NewGuid();
@@ -430,7 +395,6 @@ namespace aw_transcript
                                                   select c).FirstOrDefault();
 
                                 codeuser = items_user.id_juzgado;
-
                             }
 
                             using (db_transcriptEntities emd_salas = new db_transcriptEntities())
@@ -456,7 +420,7 @@ namespace aw_transcript
                                 }
                                 else
                                 {
-                                  Guid  guid_nsalaf = i_salas[0].id_sala;
+                                    Guid guid_nsalaf = i_salas[0].id_sala;
 
                                     using (var edm_salasf = new db_transcriptEntities())
                                     {
@@ -496,7 +460,6 @@ namespace aw_transcript
                                                 edm_conexion.SaveChanges();
                                             }
                                         }
-                             
                                     }
                                 }
                             }
@@ -544,7 +507,6 @@ namespace aw_transcript
                                            select u).ToList();
                                 if (i_d.Count == 0)
                                 {
-
                                     using (var insert_fiscal = new db_transcriptEntities())
                                     {
                                         var items_fiscal = new inf_ruta_videos
@@ -557,7 +519,6 @@ namespace aw_transcript
                                             id_sala = guid_nsala,
 
                                             fecha_registro = DateTime.Now
-
                                         };
                                         insert_fiscal.inf_ruta_videos.Add(items_fiscal);
                                         insert_fiscal.SaveChanges();
@@ -593,8 +554,6 @@ namespace aw_transcript
                             txt_user_path.Text = null;
                             txt_pass_path.Text = null;
 
-
-
                             using (db_transcriptEntities edm_s = new db_transcriptEntities())
                             {
                                 var i_s = (from i_u in edm_s.inf_salas
@@ -606,7 +565,6 @@ namespace aw_transcript
                                                i_u.nombre,
 
                                                i_u.fecha_registro,
-
                                            }).ToList();
 
                                 gv_sala.DataSource = i_s;
@@ -620,7 +578,6 @@ namespace aw_transcript
                         }
                     }
                 }
-
             }
             else if (rb_editar_sala.Checked)
             {
@@ -640,9 +597,7 @@ namespace aw_transcript
                                                   select c).FirstOrDefault();
 
                                 codeuser = items_user.id_sala;
-
                             }
-
 
                             using (db_transcriptEntities emd_salas = new db_transcriptEntities())
                             {
@@ -651,7 +606,6 @@ namespace aw_transcript
                                                select u).ToList();
                                 if (i_salas.Count == 0)
                                 {
-
                                 }
                                 else
                                 {
@@ -711,7 +665,6 @@ namespace aw_transcript
                                            select u).ToList();
                                 if (i_d.Count == 0)
                                 {
-
                                     using (var insert_fiscal = new db_transcriptEntities())
                                     {
                                         var items_fiscal = new inf_ruta_videos
@@ -724,7 +677,6 @@ namespace aw_transcript
                                             id_sala = codeuser,
 
                                             fecha_registro = DateTime.Now
-
                                         };
                                         insert_fiscal.inf_ruta_videos.Add(items_fiscal);
                                         insert_fiscal.SaveChanges();
@@ -760,8 +712,6 @@ namespace aw_transcript
                             txt_user_path.Text = null;
                             txt_pass_path.Text = null;
 
-
-
                             using (db_transcriptEntities edm_s = new db_transcriptEntities())
                             {
                                 var i_s = (from i_u in edm_s.inf_salas
@@ -773,7 +723,6 @@ namespace aw_transcript
                                                i_u.nombre,
 
                                                i_u.fecha_registro,
-
                                            }).ToList();
 
                                 gv_sala.DataSource = i_s;
@@ -808,11 +757,9 @@ namespace aw_transcript
                                                   select c).FirstOrDefault();
 
                                 codeuser = items_user.id_sala;
-
                             }
 
                             var elimna_sala = new inf_salas { id_sala = codeuser };
-
 
                             using (db_transcriptEntities edm_fecha_transf = new db_transcriptEntities())
                             {
@@ -822,7 +769,6 @@ namespace aw_transcript
 
                                 if (ii_fecha_transf.Count == 0)
                                 {
-
                                 }
                                 else
                                 {
@@ -834,7 +780,6 @@ namespace aw_transcript
                                             id_sala = ii_fecha_transf[0].id_sala,
                                             id_tipo_accion = id_accion_salas(),
                                             fecha_registro = DateTime.Now,
-
                                         };
                                         insert_userf.inf_salas_dep.Add(items_userf);
                                         insert_userf.SaveChanges();
@@ -879,7 +824,6 @@ namespace aw_transcript
                             }
                             catch
                             {
-
                             }
                             using (db_transcriptEntities data_user = new db_transcriptEntities())
                             {
@@ -892,7 +836,6 @@ namespace aw_transcript
                                                     i_u.nombre,
 
                                                     i_u.fecha_registro,
-
                                                 }).ToList();
 
                                 gv_sala.DataSource = inf_user;
@@ -933,37 +876,27 @@ namespace aw_transcript
             {
                 if (valida_sala() == 5)
                 {
-
                 }
                 else if (valida_sala() == 2)
                 {
-
-
                 }
                 else if (valida_sala() == 3)
                 {
-
                 }
                 else if (valida_sala() == 4)
                 {
-
                 }
             }
-      
-
-           
-
         }
+
         protected void btn_guardar_juzgado_Click(object sender, EventArgs e)
         {
             if (rb_agregar_juzgado.Checked == false & rb_editar_juzgado.Checked == false & rb_eliminar_juzgado.Checked == false)
             {
-
                 lblModalTitle.Text = "transcript";
                 lblModalBody.Text = "Favor de seleccionar una acción";
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
                 upModal.Update();
-
             }
             else
             {
@@ -991,7 +924,6 @@ namespace aw_transcript
                         {
                             guardar_juzgado();
                         }
-
                     }
                     else
                     {
@@ -1000,7 +932,6 @@ namespace aw_transcript
                 }
                 else if (rb_editar_juzgado.Checked == true)
                 {
-
                     int add_j = 0;
                     foreach (GridViewRow row in gv_juzgado.Rows)
                     {
@@ -1010,26 +941,21 @@ namespace aw_transcript
                             if (chkRow.Checked)
                             {
                                 add_j = add_j + 1;
-
-
                             }
-                            
                         }
                     }
                     if (add_j == 1)
                     {
                         guardar_juzgado();
                     }
-
                 }
                 else if (rb_eliminar_juzgado.Checked == true)
                 {
-
                     guardar_juzgado();
                 }
             }
-
         }
+
         private void guardar_juzgado()
         {
             guid_njuzgado = Guid.NewGuid();
@@ -1107,7 +1033,6 @@ namespace aw_transcript
 
                                     if (ii_fecha_transf.Count == 0)
                                     {
-
                                     }
                                     else
                                     {
@@ -1119,14 +1044,12 @@ namespace aw_transcript
                                                 id_juzgado = ii_fecha_transf[0].id_juzgado,
                                                 id_tipo_accion = id_accion_juzgado(),
                                                 fecha_registro = DateTime.Now,
-
                                             };
                                             insert_userf.inf_juzgados_dep.Add(items_userf);
                                             insert_userf.SaveChanges();
                                         }
                                     }
                                 }
-
 
                                 using (db_transcriptEntities emd_salas = new db_transcriptEntities())
                                 {
@@ -1207,7 +1130,6 @@ namespace aw_transcript
                                                select u).ToList();
                                     if (i_d.Count == 0)
                                     {
-
                                         using (var insert_fiscal = new db_transcriptEntities())
                                         {
                                             var items_fiscal = new inf_ruta_videos
@@ -1220,7 +1142,6 @@ namespace aw_transcript
                                                 id_sala = guid_nsala,
 
                                                 fecha_registro = DateTime.Now
-
                                             };
                                             insert_fiscal.inf_ruta_videos.Add(items_fiscal);
                                             insert_fiscal.SaveChanges();
@@ -1253,10 +1174,7 @@ namespace aw_transcript
                                 txt_buscar_juzgado.Visible = false;
                                 btn_buscar_juzgado.Visible = false;
 
-
-
                                 chkbox_sala.Visible = false;
-
 
                                 using (db_transcriptEntities edm_j = new db_transcriptEntities())
                                 {
@@ -1271,14 +1189,12 @@ namespace aw_transcript
                                                    i_u.localidad,
                                                    i_u.numero,
                                                    i_u.fecha_registro,
-
                                                }).ToList();
 
                                     gv_juzgado.DataSource = i_j;
                                     gv_juzgado.DataBind();
                                     gv_juzgado.Visible = true;
                                 }
-
 
                                 lblModalTitle.Text = "transcript";
                                 lblModalBody.Text = "Datos de juzgado agregado con éxito";
@@ -1289,9 +1205,7 @@ namespace aw_transcript
                             {
                                 rfv_colonia.Enabled = true;
                             }
-
                         }
-
                         else
                         {
                             lblModalTitle.Text = "transcript";
@@ -1299,7 +1213,6 @@ namespace aw_transcript
                             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
                             upModal.Update();
                         }
-
                     }
                 }
                 else
@@ -1354,7 +1267,6 @@ namespace aw_transcript
 
                                     if (ii_fecha_transf.Count == 0)
                                     {
-
                                     }
                                     else
                                     {
@@ -1366,7 +1278,6 @@ namespace aw_transcript
                                                 id_juzgado = ii_fecha_transf[0].id_juzgado,
                                                 id_tipo_accion = id_accion_juzgado(),
                                                 fecha_registro = DateTime.Now,
-
                                             };
                                             insert_userf.inf_juzgados_dep.Add(items_userf);
                                             insert_userf.SaveChanges();
@@ -1385,10 +1296,7 @@ namespace aw_transcript
                                 txt_buscar_juzgado.Visible = false;
                                 btn_buscar_juzgado.Visible = false;
 
-
-
                                 chkbox_sala.Visible = false;
-
 
                                 using (db_transcriptEntities edm_j = new db_transcriptEntities())
                                 {
@@ -1403,14 +1311,12 @@ namespace aw_transcript
                                                    i_u.localidad,
                                                    i_u.numero,
                                                    i_u.fecha_registro,
-
                                                }).ToList();
 
                                     gv_juzgado.DataSource = i_j;
                                     gv_juzgado.DataBind();
                                     gv_juzgado.Visible = true;
                                 }
-
 
                                 lblModalTitle.Text = "transcript";
                                 lblModalBody.Text = "Datos de juzgado agregado con éxito";
@@ -1421,9 +1327,7 @@ namespace aw_transcript
                             {
                                 rfv_colonia.Enabled = true;
                             }
-
                         }
-
                         else
                         {
                             lblModalTitle.Text = "transcript";
@@ -1431,7 +1335,6 @@ namespace aw_transcript
                             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
                             upModal.Update();
                         }
-
                     }
                 }
             }
@@ -1482,7 +1385,6 @@ namespace aw_transcript
 
                                 if (ii_fecha_transf.Count == 0)
                                 {
-
                                 }
                                 else
                                 {
@@ -1494,14 +1396,12 @@ namespace aw_transcript
                                             id_juzgado = ii_fecha_transf[0].id_juzgado,
                                             id_tipo_accion = id_accion_juzgado(),
                                             fecha_registro = DateTime.Now,
-
                                         };
                                         insert_userf.inf_juzgados_dep.Add(items_userf);
                                         insert_userf.SaveChanges();
                                     }
                                 }
                             }
-
 
                             using (db_transcriptEntities data_user = new db_transcriptEntities())
                             {
@@ -1516,7 +1416,6 @@ namespace aw_transcript
                                                     i_u.localidad,
                                                     i_u.numero,
                                                     i_u.fecha_registro,
-
                                                 }).ToList();
 
                                 gv_juzgado.DataSource = inf_user;
@@ -1530,7 +1429,6 @@ namespace aw_transcript
                             rb_editar_juzgado.Checked = false;
 
                             chkbox_sala.Checked = false;
-
 
                             rb_agregar_sala.Checked = false;
                             rb_editar_sala.Checked = false;
@@ -1574,7 +1472,6 @@ namespace aw_transcript
                         }
                     }
                 }
-
             }
             else if (rb_eliminar_juzgado.Checked)
             {
@@ -1596,7 +1493,6 @@ namespace aw_transcript
                                                   select c).FirstOrDefault();
 
                                 codeuser = items_user.id_juzgado;
-
                             }
                             using (db_transcriptEntities edm_fecha_transf = new db_transcriptEntities())
                             {
@@ -1606,7 +1502,6 @@ namespace aw_transcript
 
                                 if (ii_fecha_transf.Count == 0)
                                 {
-
                                 }
                                 else
                                 {
@@ -1618,14 +1513,12 @@ namespace aw_transcript
                                             id_juzgado = ii_fecha_transf[0].id_juzgado,
                                             id_tipo_accion = id_accion_juzgado(),
                                             fecha_registro = DateTime.Now,
-
                                         };
                                         insert_userf.inf_juzgados_dep.Add(items_userf);
                                         insert_userf.SaveChanges();
                                     }
                                 }
                             }
-
 
                             using (var edm_j = new db_transcriptEntities())
                             {
@@ -1636,7 +1529,6 @@ namespace aw_transcript
                                 edm_j.inf_juzgados.Remove(i_j);
                                 edm_j.SaveChanges();
                             }
-
 
                             using (var edm_s = new db_transcriptEntities())
                             {
@@ -1686,7 +1578,6 @@ namespace aw_transcript
                                 }
                             }
 
-
                             using (db_transcriptEntities data_user = new db_transcriptEntities())
                             {
                                 var inf_user = (from i_u in data_user.inf_juzgados
@@ -1700,7 +1591,6 @@ namespace aw_transcript
                                                     i_u.localidad,
                                                     i_u.numero,
                                                     i_u.fecha_registro,
-
                                                 }).ToList();
 
                                 gv_juzgado.DataSource = inf_user;
@@ -1713,7 +1603,6 @@ namespace aw_transcript
                             limpiar_textbox_juzgado();
                             rb_eliminar_juzgado.Checked = false;
                             chkbox_sala.Checked = false;
-
 
                             rb_agregar_sala.Checked = false;
                             rb_editar_sala.Checked = false;
@@ -1785,9 +1674,6 @@ namespace aw_transcript
 
             btn_guarda_sala.Visible = false;
 
-
-
-
             txt_buscar_juzgado.Visible = false;
             btn_buscar_juzgado.Visible = false;
             gv_juzgado.Visible = false;
@@ -1832,7 +1718,6 @@ namespace aw_transcript
             txt_user_path.Enabled = false;
             txt_pass_path.Enabled = false;
             btn_guarda_sala.Enabled = false;
-
         }
 
         private void limpiar_textbox_juzgado()
@@ -1847,10 +1732,6 @@ namespace aw_transcript
             ddl_colonia.SelectedValue = "0";
             txt_municipio.Text = "";
             txt_estado.Text = "";
-
-
-
-
         }
 
         protected void rb_editar_juzgado_CheckedChanged(object sender, EventArgs e)
@@ -1870,10 +1751,7 @@ namespace aw_transcript
             txt_buscar_juzgado.Visible = false;
             btn_buscar_juzgado.Visible = false;
 
-
-
             chkbox_sala.Visible = false;
-
 
             using (db_transcriptEntities data_user = new db_transcriptEntities())
             {
@@ -1888,7 +1766,6 @@ namespace aw_transcript
                                     i_u.localidad,
                                     i_u.numero,
                                     i_u.fecha_registro,
-
                                 }).ToList();
 
                 gv_juzgado.DataSource = inf_user;
@@ -1921,7 +1798,6 @@ namespace aw_transcript
 
             rb_agregar_sala.Enabled = true;
 
-
             rb_editar_sala.Enabled = true;
             rb_eliminar_sala.Enabled = true;
             txt_sala.Enabled = true;
@@ -1936,8 +1812,6 @@ namespace aw_transcript
             txt_user_path.Enabled = true;
             txt_pass_path.Enabled = true;
             btn_guarda_sala.Enabled = true;
-
-
 
             rb_editar_sala.Checked = false;
             rb_eliminar_sala.Checked = false;
@@ -1966,7 +1840,6 @@ namespace aw_transcript
                                     i_u.localidad,
                                     i_u.numero,
                                     i_u.fecha_registro,
-
                                 }).ToList();
 
                 gv_juzgado.DataSource = inf_user;
@@ -1977,7 +1850,6 @@ namespace aw_transcript
 
         protected void chk_juzgado_CheckedChanged(object sender, EventArgs e)
         {
-
             rb_agregar_sala.Enabled = true;
             rb_agregar_sala.Visible = true;
             rb_editar_sala.Visible = true;
@@ -1997,8 +1869,6 @@ namespace aw_transcript
             txt_user_path.Enabled = true;
             txt_pass_path.Enabled = true;
             btn_guarda_sala.Enabled = true;
-
-
 
             rb_editar_sala.Checked = false;
             rb_eliminar_sala.Checked = false;
@@ -2035,7 +1905,6 @@ namespace aw_transcript
                             txt_callenum.Text = i_tribunal.callenum;
                             //txt_cp.Text = i_tribunal.cp;
                             guid_idjuzgado = i_tribunal.id_juzgado;
-
 
                             using (db_transcriptEntities db_sepomex = new db_transcriptEntities())
                             {
@@ -2079,7 +1948,6 @@ namespace aw_transcript
                                                 i_u.nombre,
 
                                                 i_u.fecha_registro,
-
                                             }).ToList();
 
                             gv_sala.DataSource = inf_user;
@@ -2103,7 +1971,6 @@ namespace aw_transcript
 
             btn_guarda_sala.Visible = true;
 
-
             txt_sala.Text = null;
             txt_ip.Text = null;
             txt_user_ip.Text = null;
@@ -2121,7 +1988,6 @@ namespace aw_transcript
             rb_eliminar_sala.Checked = false;
 
             btn_guarda_sala.Visible = true;
-
 
             foreach (GridViewRow row in gv_juzgado.Rows)
             {
@@ -2144,7 +2010,6 @@ namespace aw_transcript
                             txt_callenum.Text = i_tribunal.callenum;
                             //txt_cp.Text = i_tribunal.cp;
                             guid_idjuzgado = i_tribunal.id_juzgado;
-
 
                             using (db_transcriptEntities db_sepomex = new db_transcriptEntities())
                             {
@@ -2175,7 +2040,6 @@ namespace aw_transcript
                                                 i_u.nombre,
 
                                                 i_u.fecha_registro,
-
                                             }).ToList();
 
                             gv_sala.DataSource = inf_user;
@@ -2220,7 +2084,6 @@ namespace aw_transcript
                             //txt_cp.Text = i_tribunal.cp;
                             guid_idjuzgado = i_tribunal.id_juzgado;
 
-
                             using (db_transcriptEntities db_sepomex = new db_transcriptEntities())
                             {
                                 var tbl_sepomex = (from c in db_sepomex.inf_sepomex
@@ -2250,7 +2113,6 @@ namespace aw_transcript
                                                 i_u.nombre,
 
                                                 i_u.fecha_registro,
-
                                             }).ToList();
 
                             gv_sala.DataSource = inf_user;
@@ -2270,7 +2132,6 @@ namespace aw_transcript
         {
             if (string.IsNullOrEmpty(txt_buscar_juzgado.Text))
             {
-
                 txt_buscar_juzgado.BackColor = Color.Yellow;
             }
             else
@@ -2292,7 +2153,6 @@ namespace aw_transcript
                                         i_u.numero,
                                         i_e.desc_especializa,
                                         i_u.fecha_registro,
-
                                     }).ToList();
 
                     gv_juzgado.DataSource = inf_user;
@@ -2312,10 +2172,8 @@ namespace aw_transcript
             txt_user_path.Text = null;
             txt_pass_path.Text = null;
 
-
             if (rb_editar_sala.Checked || rb_eliminar_sala.Checked)
             {
-
                 foreach (GridViewRow row in gv_sala.Rows)
                 {
                     if (row.RowType == DataControlRowType.DataRow)
@@ -2342,7 +2200,6 @@ namespace aw_transcript
 
                                 txt_sala.Text = inf_user.nombre;
                                 guid_idsala = inf_user.id_sala;
-
                             }
 
                             using (db_transcriptEntities edm_conexion = new db_transcriptEntities())
@@ -2403,7 +2260,6 @@ namespace aw_transcript
                                                             i_r.desc_ruta_ini,
                                                             i_r.ruta_user_ini,
                                                             i_r.ruta_pass_ini
-
                                                         }).FirstOrDefault();
 
                                         txt_path_videos.Text = inf_user.desc_ruta_ini;
@@ -2433,7 +2289,6 @@ namespace aw_transcript
                                                         i_r.desc_ruta_ini,
                                                         i_r.ruta_user_ini,
                                                         i_r.ruta_pass_ini
-
                                                     }).FirstOrDefault();
 
                                     txt_sala.Text = inf_user.nombre;
@@ -2461,9 +2316,9 @@ namespace aw_transcript
 
         protected void btn_ip_validar_Click(object sender, EventArgs e)
         {
-
             GetLocations();
         }
+
         private void GetLocations()
         {
             string str_ip = txt_ip.Text;
@@ -2485,10 +2340,7 @@ namespace aw_transcript
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
                 upModal.Update();
             }
-
         }
-
-
 
         protected void gv_juzgado_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
@@ -2507,7 +2359,6 @@ namespace aw_transcript
                                     i_u.localidad,
                                     i_u.numero,
                                     i_u.fecha_registro,
-
                                 }).ToList();
 
                 gv_juzgado.DataSource = inf_user;
@@ -2528,7 +2379,6 @@ namespace aw_transcript
                     {
                         row.BackColor = Color.YellowGreen;
                         int int_code = int.Parse(row.Cells[5].Text);
-
 
                         using (db_transcriptEntities m_tribunal = new db_transcriptEntities())
                         {
@@ -2570,7 +2420,6 @@ namespace aw_transcript
                                                     i_u.nombre,
 
                                                     i_u.fecha_registro,
-
                                                 }).ToList();
 
                                 gv_sala.DataSource = inf_user;
@@ -2587,7 +2436,6 @@ namespace aw_transcript
             }
         }
 
-
         private void datos_sepomex(string str_codigo)
         {
             using (db_transcriptEntities db_sepomex = new db_transcriptEntities())
@@ -2603,15 +2451,12 @@ namespace aw_transcript
 
                 if (tbl_sepomex.Count == 1)
                 {
-
-
                     txt_municipio.Text = tbl_sepomex[0].D_mnpio;
                     txt_estado.Text = tbl_sepomex[0].d_estado;
                     rfv_colonia.Enabled = true;
                 }
                 if (tbl_sepomex.Count > 1)
                 {
-
                     ddl_colonia.Items.Insert(0, new ListItem("*Colonia", "0"));
 
                     txt_municipio.Text = tbl_sepomex[0].D_mnpio;
@@ -2620,7 +2465,6 @@ namespace aw_transcript
                 }
                 else if (tbl_sepomex.Count == 0)
                 {
-
                     ddl_colonia.Items.Clear();
                     ddl_colonia.Items.Insert(0, new ListItem("*Colonia", "0"));
                     txt_municipio.Text = "";
@@ -2629,7 +2473,6 @@ namespace aw_transcript
                 }
             }
         }
-
 
         protected void txt_cp_TextChanged(object sender, EventArgs e)
         {
@@ -2640,7 +2483,6 @@ namespace aw_transcript
 
         protected void txt_ip_TextChanged(object sender, EventArgs e)
         {
-
             if (string.IsNullOrEmpty(txt_ip.Text))
             {
                 rfv_ip.Enabled = true;
@@ -2659,7 +2501,6 @@ namespace aw_transcript
                 rfv_user_path.Enabled = false;
                 rfv_pass_path.Enabled = false;
             }
-            
         }
 
         protected void txt_path_videos_TextChanged(object sender, EventArgs e)
@@ -2682,7 +2523,6 @@ namespace aw_transcript
                 rfv_user_path.Enabled = true;
                 rfv_pass_path.Enabled = true;
             }
-         
         }
 
         public class NetworkConnection : IDisposable
@@ -2694,7 +2534,7 @@ namespace aw_transcript
             /// </summary>
             private readonly string _networkName;
 
-            #endregion
+            #endregion Variables
 
             #region Constructors
 
@@ -2724,12 +2564,11 @@ namespace aw_transcript
 
                 if (result != 0)
                 {
-
                     throw new Win32Exception(result);
                 }
             }
 
-            #endregion
+            #endregion Constructors
 
             #region Events
 
@@ -2738,7 +2577,7 @@ namespace aw_transcript
             /// </summary>
             public event EventHandler<EventArgs> Disposed;
 
-            #endregion
+            #endregion Events
 
             #region Public methods
 
@@ -2751,7 +2590,7 @@ namespace aw_transcript
                 GC.SuppressFinalize(this);
             }
 
-            #endregion
+            #endregion Public methods
 
             #region Protected methods
 
@@ -2771,7 +2610,7 @@ namespace aw_transcript
                 WNetCancelConnection2(_networkName, 0, true);
             }
 
-            #endregion
+            #endregion Protected methods
 
             #region Private static methods
 
@@ -2802,7 +2641,7 @@ namespace aw_transcript
             [DllImport("mpr.dll")]
             private static extern int WNetCancelConnection2(string name, int flags, bool force);
 
-            #endregion
+            #endregion Private static methods
 
             /// <summary>
             /// Finalizes an instance of the <see cref="NetworkConnection"/> class.
@@ -2815,6 +2654,7 @@ namespace aw_transcript
         }
 
         #region Objects needed for the Win32 functions
+
 #pragma warning disable 1591
 
         /// <summary>
@@ -2856,10 +2696,6 @@ namespace aw_transcript
             Reserved = 8,
         }
 
-
-
-
-
         /// <summary>
         /// The resource displaytype.
         /// </summary>
@@ -2878,7 +2714,9 @@ namespace aw_transcript
             Tree = 0x0a,
             Ndscontainer = 0x0b
         }
+
 #pragma warning restore 1591
-        #endregion
+
+        #endregion Objects needed for the Win32 functions
     }
 }

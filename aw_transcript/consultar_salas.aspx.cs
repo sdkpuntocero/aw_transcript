@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -9,21 +7,19 @@ namespace aw_transcript
 {
     public partial class consultar_salas : System.Web.UI.Page
     {
-        static Guid guid_fidusuario, guid_fidcentro;
+        private static Guid guid_fidusuario, guid_fidcentro;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
-
                 if (!IsPostBack)
                 {
                     inf_user();
                     load_ddl();
-
                 }
                 else
                 {
-
                 }
             }
             catch
@@ -31,6 +27,7 @@ namespace aw_transcript
                 Response.Redirect("acceso.aspx");
             }
         }
+
         private void inf_user()
         {
             guid_fidusuario = (Guid)(Session["ss_id_user"]);
@@ -50,7 +47,6 @@ namespace aw_transcript
                                      i_tu.id_tipo_usuario,
                                      i_e.nombre,
                                      i_e.id_tribunal
-
                                  }).FirstOrDefault();
 
                 lbl_fuser.Text = i_usuario.nombres + " " + i_usuario.a_paterno + " " + i_usuario.a_materno;
@@ -58,15 +54,12 @@ namespace aw_transcript
                 lbl_idprofileuser.Text = i_usuario.id_tipo_usuario.ToString();
                 lbl_centername.Text = i_usuario.nombre;
                 guid_fidcentro = i_usuario.id_tribunal;
-
             }
-
-
 
             using (db_transcriptEntities edm_conexion = new db_transcriptEntities())
             {
                 var i_conexion = (from i_j in edm_conexion.v_salas
-                                
+
                                   select new
                                   {
                                       i_j.codigo_juzgado,
@@ -79,10 +72,7 @@ namespace aw_transcript
                                       i_j.usuario,
                                       i_j.desc_ruta_ini,
                                       i_j.ruta_user_ini
-
-
                                   }).ToList();
-
 
                 if (i_conexion.Count == 0)
                 {
@@ -94,11 +84,9 @@ namespace aw_transcript
             }
         }
 
-
         protected void ddl_especializa_SelectedIndexChanged(object sender, EventArgs e)
         {
             int int_idespecializa = int.Parse(ddl_especializa.SelectedValue);
-
 
             ddl_localidad.Items.Clear();
             using (db_transcriptEntities m_especializa = new db_transcriptEntities())
@@ -114,14 +102,13 @@ namespace aw_transcript
             }
 
             ddl_localidad.Items.Insert(0, new ListItem("Seleccionar", "0"));
-
         }
 
         protected void ddl_localidad_SelectedIndexChanged(object sender, EventArgs e)
         {
             string str_localidad = ddl_localidad.SelectedValue;
-
         }
+
         private void load_ddl()
         {
             using (db_transcriptEntities m_especializa = new db_transcriptEntities())
@@ -136,16 +123,14 @@ namespace aw_transcript
             }
             ddl_especializa.Items.Insert(0, new ListItem("Seleccionar", "0"));
             ddl_localidad.Items.Insert(0, new ListItem("Seleccionar", "0"));
-
-
         }
+
         protected void ddl_nomnum_SelectedIndexChanged(object sender, EventArgs e)
         {
             int int_idespecializa = int.Parse(ddl_especializa.SelectedValue);
             string str_localidad = ddl_localidad.SelectedValue;
 
             Guid guid_idjusgado;
-
 
             using (db_transcriptEntities m_especializa = new db_transcriptEntities())
             {
@@ -157,11 +142,9 @@ namespace aw_transcript
                                      select c).FirstOrDefault();
 
                 guid_idjusgado = i_especializa.id_juzgado;
-
-
             }
-
         }
+
         protected void btn_fconex_Click(object sender, EventArgs e)
         {
             int int_idespecializa = int.Parse(ddl_especializa.SelectedValue);
@@ -183,13 +166,10 @@ namespace aw_transcript
                                       i_j.usuario,
                                       i_j.desc_ruta_ini,
                                       i_j.ruta_user_ini
-                                  
-
                                   }).ToList();
 
                 if (i_conexion.Count == 0)
                 {
-
                     gv_credentials.Visible = false;
                 }
                 else

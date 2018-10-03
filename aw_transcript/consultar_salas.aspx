@@ -81,10 +81,10 @@
                                                                 <asp:BoundField DataField="desc_especializa" HeaderText="Tipo Juzgado" SortExpression="desc_especializa" />
                                                                 <asp:BoundField DataField="localidad" HeaderText="Localidad" SortExpression="localidad" />
                                                                 <asp:BoundField DataField="numero" HeaderText="Nombre y/o número Juzgado" SortExpression="numero" />
-                                                          <%--      <asp:BoundField DataField="codigo_sala" HeaderText="ID Sala" SortExpression="codigo_sala" />--%>
+                                                                <%--      <asp:BoundField DataField="codigo_sala" HeaderText="ID Sala" SortExpression="codigo_sala" />--%>
                                                                 <asp:BoundField DataField="nombre" HeaderText="Nomre Sala" SortExpression="nombre" />
                                                                 <asp:BoundField DataField="ip" HeaderText="IP" SortExpression="ip" />
-                                                                
+
                                                                 <%--<asp:BoundField DataField="id_ruta_videos" HeaderText="IP" SortExpression="id_ruta_videos" />--%>
                                                                 <asp:BoundField DataField="desc_ruta_ini" HeaderText="Ruta" SortExpression="desc_ruta_ini" />
                                                                 <%--<asp:BoundField DataField="fecha_registro" HeaderText="Fecha de Registro" SortExpression="fecha_registro" DataFormatString="{0:dd/MM/yyyy}" />--%>

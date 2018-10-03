@@ -1,17 +1,10 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System;
 using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -19,24 +12,20 @@ namespace aw_transcript
 {
     public partial class estatus_carga : System.Web.UI.Page
     {
-        static string str_session, str_video;
-        static Guid guid_fidusuario, guid_fidcentro;
-        static int s_gn;
+        private static string str_session, str_video;
+        private static Guid guid_fidusuario, guid_fidcentro;
+        private static int s_gn;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-
-
             try
             {
-
                 if (!IsPostBack)
                 {
                     inf_user();
-
                 }
                 else
                 {
-
                 }
             }
             catch
@@ -44,6 +33,7 @@ namespace aw_transcript
                 Response.Redirect("ctrl_acceso.aspx");
             }
         }
+
         private void inf_user()
         {
             guid_fidusuario = (Guid)(Session["ss_id_user"]);
@@ -63,7 +53,6 @@ namespace aw_transcript
                                      i_tu.id_tipo_usuario,
                                      i_e.nombre,
                                      i_e.id_tribunal
-
                                  }).FirstOrDefault();
 
                 lbl_fuser.Text = i_usuario.nombres + " " + i_usuario.a_paterno + " " + i_usuario.a_materno;
@@ -71,7 +60,6 @@ namespace aw_transcript
                 lbl_idprofileuser.Text = i_usuario.id_tipo_usuario.ToString();
                 lbl_centername.Text = i_usuario.nombre;
                 guid_fidcentro = i_usuario.id_tribunal;
-
             }
 
             using (db_transcriptEntities edm_fecha_transf = new db_transcriptEntities())
@@ -81,13 +69,10 @@ namespace aw_transcript
 
                 if (i_fecha_transf.Count != 0)
                 {
-
                 }
             }
-
-
-
         }
+
         protected void chk_OnCheckedChanged(object sender, EventArgs e)
         {
             foreach (GridViewRow row in gv_files.Rows)
@@ -99,7 +84,6 @@ namespace aw_transcript
                     if (chkRow.Checked)
                     {
                         row.BackColor = Color.YellowGreen;
-
                     }
                     else
                     {
@@ -107,8 +91,8 @@ namespace aw_transcript
                     }
                 }
             }
-
         }
+
         protected void cmd_search_Click(object sender, EventArgs e)
         {
             //play_video.Visible = false;
@@ -130,8 +114,6 @@ namespace aw_transcript
                     play_video.Visible = false;
 
                     upModal.Update();
-
-
                 }
                 else
                 {
@@ -156,14 +138,12 @@ namespace aw_transcript
 
                                 if (i_materialff.Count == 0)
                                 {
-
                                     var two_userff = new int?[] { 1, 3, 4, 5, 8, 9 };
                                     flist_user(two_userff);
 
                                     iframe_pdf.Visible = false;
                                     play_video.Visible = false;
                                     upModal.Update();
-
                                 }
                                 else
                                 {
@@ -177,21 +157,14 @@ namespace aw_transcript
                                     play_video.Visible = false;
 
                                     upModal.Update();
-
-
-
                                 }
-
                             }
-
                         }
-
                     }
                 }
-
             }
-
         }
+
         private void flist_user(int?[] str_idload)
         {
             CultureInfo en = new CultureInfo("en-US");
@@ -221,17 +194,12 @@ namespace aw_transcript
                                           inf_m.fecha_registro,
                                           inf_em.desc_estatus_material,
                                           inf_m.id_material
-
                                       }).ToList();
 
                     gv_files.DataSource = i_material;
                     gv_files.DataBind();
                     gv_files.Visible = true;
-
                 }
-
-
-
             }
             else
             {
@@ -257,27 +225,20 @@ namespace aw_transcript
                                           inf_m.fecha_registro,
                                           inf_em.desc_estatus_material,
                                           inf_m.id_material
-
                                       }).ToList();
 
                     gv_files.DataSource = i_material;
                     gv_files.DataBind();
                     gv_files.Visible = true;
-
-
                 }
-
-
             }
         }
+
         protected void gv_files_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-
             try
             {
-
                 GridViewRow gvr = (GridViewRow)(((Button)e.CommandSource).NamingContainer);
-
 
                 string status = gvr.Cells[11].Text.ToString().Trim();
 
@@ -287,10 +248,7 @@ namespace aw_transcript
 
                 switch (status)
                 {
-
-
                     case "ACTIVO":
-
 
                         using (var edm_material = new db_transcriptEntities())
                         {
@@ -322,7 +280,7 @@ namespace aw_transcript
                         if (name_btn == "PDF")
                         {
                             lblModalTitle.Text = "transcript";
-                            Label1.Text = "Expediente:" + str_session  + " - Archivo:" + str_video.Replace(".mp4", "");
+                            Label1.Text = "Expediente:" + str_session + " - Archivo:" + str_video.Replace(".mp4", "");
                             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal_pdf", "$('#myModal_pdf').modal();", true);
                             up_pdf.Update();
                         }
@@ -330,12 +288,13 @@ namespace aw_transcript
 
                         {
                             lblModalTitle.Text = "transcript";
-                            Label2.Text = "Expediente:" + str_session  + " - Archivo:" + str_video.Replace(".mp4", "");
+                            Label2.Text = "Expediente:" + str_session + " - Archivo:" + str_video.Replace(".mp4", "");
                             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal_video", "$('#myModal_video').modal();", true);
                             up_video.Update();
                         }
 
                         break;
+
                     case "ERROR":
 
                         using (var data_mat = new db_transcriptEntities())
@@ -351,6 +310,7 @@ namespace aw_transcript
 
                         flist_user(two_user);
                         break;
+
                     case "NUEVO":
 
                         using (var data_mat = new db_transcriptEntities())
@@ -366,13 +326,10 @@ namespace aw_transcript
 
                         flist_user(two_user);
                         break;
-
                 }
             }
             catch
             { }
-
-
         }
 
         protected void gv_files_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -391,7 +348,6 @@ namespace aw_transcript
                                       where inf_m.id_material == customerId
                                       select new
                                       {
-
                                           inf_m.sesion,
                                           inf_m.archivo,
                                           inf_m.duracion,
@@ -399,7 +355,6 @@ namespace aw_transcript
                                           inf_em.desc_estatus_material,
                                           inf_m.id_material,
                                           inf_m.id_material_ext
-
                                       }).ToList();
                     gv_material_ext.DataSource = i_material;
                     gv_material_ext.DataBind();
@@ -407,7 +362,6 @@ namespace aw_transcript
 
                     //if (gv_material_ext.Rows.Count == 0)
                     //{
-
                     //}
                     //else
                     //{
@@ -415,7 +369,6 @@ namespace aw_transcript
                     //    string _EstatusExt = gv_material_ext.Rows[1].Cells[4].Text;
                     //    if (_EstatusExt == "ERROR")
                     //    {
-
                     //        //btnButton_ext.Text = "CARGAR";
                     //        //btnButton_ext.Enabled = true;
                     //    }
@@ -442,7 +395,6 @@ namespace aw_transcript
                     //    }
 
                     //}
-
                 }
             }
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -451,11 +403,9 @@ namespace aw_transcript
                 Button btnButton_v = (Button)e.Row.FindControl("btn_video");
                 if (e.Row.Cells[11].Text == "ERROR")
                 {
-
                     btnButton.Text = "CARGAR";
                     btnButton.Enabled = true;
                 }
-
                 else if (e.Row.Cells[11].Text == "ACTIVO")
                 {
                     btnButton.Text = "PDF";
@@ -484,12 +434,11 @@ namespace aw_transcript
                     btnButton.Enabled = true;
                 }
             }
-
-
         }
+
         public String MyNewRow(object idmaterial)
         {
-            /* 
+            /*
                 * 1. Close current cell in our example phone </TD>
                 * 2. Close Current Row </TR>
                 * 3. Cretae new Row with ID and class <TR id='...' style='...'>
@@ -500,133 +449,127 @@ namespace aw_transcript
             return String.Format(@"</td></tr><tr id ='tr{0}' style='collapsed-row'>
                <td></td><td colspan='100' style='padding:0px; margin:0px;'>", idmaterial);
         }
+
         protected void rb_internos_CheckedChanged(object sender, EventArgs e)
         {
-
         }
 
         protected void rb_externos_CheckedChanged(object sender, EventArgs e)
         {
-
         }
 
         protected void gv_material_ext_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             try
             {
-
                 GridViewRow gvr = (GridViewRow)(((Button)e.CommandSource).NamingContainer);
 
+                string status = gvr.Cells[5].Text.ToString().Trim();
+                int id_sessionf = int.Parse(gvr.Cells[0].Text);
+                int id_session;
+                string str_sessionf;
+                using (var data_mat = new db_transcriptEntities())
+                {
+                    var items_mat = (from c in data_mat.inf_material_ext
+                                     where c.id_material_ext == id_sessionf
+                                     select c).FirstOrDefault();
 
-            string status = gvr.Cells[5].Text.ToString().Trim();
-            int id_sessionf = int.Parse(gvr.Cells[0].Text);
-            int id_session;
-            string str_sessionf;
-            using (var data_mat = new db_transcriptEntities())
-            {
-                var items_mat = (from c in data_mat.inf_material_ext
-                                 where c.id_material_ext == id_sessionf
-                                 select c).FirstOrDefault();
+                    id_session = items_mat.id_material;
+                }
+                using (var data_mat = new db_transcriptEntities())
+                {
+                    var items_mat = (from c in data_mat.inf_material
+                                     where c.id_material == id_session
+                                     select c).FirstOrDefault();
 
-                id_session = items_mat.id_material;
-            }
-            using (var data_mat = new db_transcriptEntities())
-            {
-                var items_mat = (from c in data_mat.inf_material
-                                 where c.id_material == id_session
-                                 select c).FirstOrDefault();
+                    str_sessionf = items_mat.sesion;
+                }
 
-                str_sessionf = items_mat.sesion;
-            }
+                str_session = gvr.Cells[1].Text;
+                str_video = gvr.Cells[2].Text + ".mp4";
+                var two_user = new int?[] { 1, 3, 4, 5, 8, 9 };
 
+                switch (status)
+                {
+                    case "ACTIVO":
 
-            str_session = gvr.Cells[1].Text;
-            str_video = gvr.Cells[2].Text + ".mp4";
-            var two_user = new int?[] { 1, 3, 4, 5, 8, 9 };
-
-            switch (status)
-            {
-
-
-                case "ACTIVO":
-
-
-                    using (var edm_material = new db_transcriptEntities())
-                    {
-                        var i_material = new inf_material_dep
+                        using (var edm_material = new db_transcriptEntities())
                         {
-                            sesion = str_session,
-                            video = str_video,
-                            id_usuario = guid_fidusuario,
-                            id_material = 0,
-                            fecha_registro = DateTime.Now,
-                            fecha_registro_alt = DateTime.Now
-                        };
+                            var i_material = new inf_material_dep
+                            {
+                                sesion = str_session,
+                                video = str_video,
+                                id_usuario = guid_fidusuario,
+                                id_material = 0,
+                                fecha_registro = DateTime.Now,
+                                fecha_registro_alt = DateTime.Now
+                            };
 
-                        edm_material.inf_material_dep.Add(i_material);
-                        edm_material.SaveChanges();
-                    }
+                            edm_material.inf_material_dep.Add(i_material);
+                            edm_material.SaveChanges();
+                        }
 
-                    string d_pdf = "videos\\" + str_sessionf + "\\" + str_session + "\\" + str_session + "\\ExtraFiles\\" + str_session + "_Report.pdf";
-                    iframe_pdf.Visible = true;
-                    iframe_pdf.Attributes["src"] = d_pdf;
+                        string d_pdf = "videos\\" + str_sessionf + "\\" + str_session + "\\" + str_session + "\\ExtraFiles\\" + str_session + "_Report.pdf";
+                        iframe_pdf.Visible = true;
+                        iframe_pdf.Attributes["src"] = d_pdf;
 
-                    string str_namefile = @"videos\\" + str_sessionf + "\\" + str_session + "\\" + str_session + "\\" + str_video;
+                        string str_namefile = @"videos\\" + str_sessionf + "\\" + str_session + "\\" + str_session + "\\" + str_video;
 
-                    play_video.Visible = true;
-                    play_video.Attributes["src"] = str_namefile;
-                    Button btn = e.CommandSource as Button;
-                    string name_btn = btn.Text;
+                        play_video.Visible = true;
+                        play_video.Attributes["src"] = str_namefile;
+                        Button btn = e.CommandSource as Button;
+                        string name_btn = btn.Text;
 
-                    if (name_btn == "PDF")
-                    {
-                        lblModalTitle.Text = "transcript";
-                        Label1.Text = "Expediente:" + str_sessionf + " - Sesión:" + str_session + " - Archivo:" + str_video.Replace(".mp4","");
-                        ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal_pdf", "$('#myModal_pdf').modal();", true);
-                        up_pdf.Update();
-                    }
-                    else
+                        if (name_btn == "PDF")
+                        {
+                            lblModalTitle.Text = "transcript";
+                            Label1.Text = "Expediente:" + str_sessionf + " - Sesión:" + str_session + " - Archivo:" + str_video.Replace(".mp4", "");
+                            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal_pdf", "$('#myModal_pdf').modal();", true);
+                            up_pdf.Update();
+                        }
+                        else
 
-                    {
-                        lblModalTitle.Text = "transcript";
-                        Label2.Text ="Expediente:"+ str_sessionf + " - Sesión:" + str_session + " - Archivo:" + str_video.Replace(".mp4", "");
-                        ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal_video", "$('#myModal_video').modal();", true);
-                        up_video.Update();
-                    }
+                        {
+                            lblModalTitle.Text = "transcript";
+                            Label2.Text = "Expediente:" + str_sessionf + " - Sesión:" + str_session + " - Archivo:" + str_video.Replace(".mp4", "");
+                            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal_video", "$('#myModal_video').modal();", true);
+                            up_video.Update();
+                        }
 
-                    break;
-                case "ERROR":
+                        break;
 
-                    using (var data_mat = new db_transcriptEntities())
-                    {
-                        var items_mat = (from c in data_mat.inf_material
-                                         where c.sesion == str_session
-                                         select c).FirstOrDefault();
+                    case "ERROR":
 
-                        items_mat.id_estatus_material = 3;
+                        using (var data_mat = new db_transcriptEntities())
+                        {
+                            var items_mat = (from c in data_mat.inf_material
+                                             where c.sesion == str_session
+                                             select c).FirstOrDefault();
 
-                        data_mat.SaveChanges();
-                    }
+                            items_mat.id_estatus_material = 3;
 
-                    flist_user(two_user);
-                    break;
-                case "NUEVO":
+                            data_mat.SaveChanges();
+                        }
 
-                    using (var data_mat = new db_transcriptEntities())
-                    {
-                        var items_mat = (from c in data_mat.inf_material
-                                         where c.sesion == str_session
-                                         select c).FirstOrDefault();
+                        flist_user(two_user);
+                        break;
 
-                        items_mat.id_estatus_material = 3;
+                    case "NUEVO":
 
-                        data_mat.SaveChanges();
-                    }
+                        using (var data_mat = new db_transcriptEntities())
+                        {
+                            var items_mat = (from c in data_mat.inf_material
+                                             where c.sesion == str_session
+                                             select c).FirstOrDefault();
 
-                    flist_user(two_user);
-                    break;
+                            items_mat.id_estatus_material = 3;
 
-            }
+                            data_mat.SaveChanges();
+                        }
+
+                        flist_user(two_user);
+                        break;
+                }
             }
             catch
             { }
@@ -640,11 +583,9 @@ namespace aw_transcript
                 Button btnButton_v = (Button)e.Row.FindControl("btn_video_ext");
                 if (e.Row.Cells[5].Text == "ERROR")
                 {
-
                     btnButton.Text = "CARGAR";
                     btnButton.Enabled = true;
                 }
-
                 else if (e.Row.Cells[5].Text == "ACTIVO")
                 {
                     btnButton.Text = "PDF";
@@ -668,7 +609,6 @@ namespace aw_transcript
                     btnButton.Enabled = false;
                 }
             }
-
         }
 
         protected void Unnamed_Click(object sender, EventArgs e)
@@ -678,8 +618,6 @@ namespace aw_transcript
             //UpdatePanel2.Update();
             GridViewRow row = (sender as LinkButton).NamingContainer as GridViewRow;
 
-
-
             var two_user = new int?[] { 1, 3, 4, 5, 8, 9 };
             string status = row.Cells[5].Text.ToString().Trim();
 
@@ -687,18 +625,15 @@ namespace aw_transcript
             int id_m;
             switch (status)
             {
-
                 case "XML":
 
                     break;
+
                 case "ACTIVO":
-
-
 
                     string str_session_p;
                     str_session = row.Cells[1].Text;
                     str_video = row.Cells[2].Text + ".mp4";
-
 
                     //using (var data_mat = new db_transcriptEntities())
                     //{
@@ -747,13 +682,13 @@ namespace aw_transcript
 
                         string str_namefile = @"videos\\" + sessionf + "\\" + str_session + "\\" + str_session + "\\" + str_video;
 
-
                         play_video.Attributes["src"] = str_namefile;
                     }
 
                     s_gn = 1;
 
                     break;
+
                 case "ERROR":
                     using (var data_mat = new db_transcriptEntities())
                     {
@@ -766,8 +701,8 @@ namespace aw_transcript
                         data_mat.SaveChanges();
                     }
 
-
                     break;
+
                 case "NUEVO":
 
                     using (var data_mat = new db_transcriptEntities())
@@ -789,7 +724,6 @@ namespace aw_transcript
             //UpdatePanel2.Update();
             //Response.Redirect(Request.Url.AbsoluteUri);
         }
-
 
         protected void btn_csv_Click(object sender, EventArgs e)
         {

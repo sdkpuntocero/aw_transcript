@@ -47,8 +47,8 @@
                             <div class="form-group">
                                 <h5>
                                     <asp:Label CssClass="control-label" ID="lbl_fechaini" runat="server" Text="*Fecha Inicial"></asp:Label></h5>
-                                <asp:TextBox CssClass="form-control" ID="txt_dateini" runat="server" placeholder="Buscar fecha incial" ></asp:TextBox>
-                                  <ajaxToolkit:CalendarExtender ID="ce_dateini" runat="server" BehaviorID="ce_dateini" TargetControlID="txt_dateini" Format="yyyy/MM/dd" />
+                                <asp:TextBox CssClass="form-control" ID="txt_dateini" runat="server" placeholder="Buscar fecha incial"></asp:TextBox>
+                                <ajaxToolkit:CalendarExtender ID="ce_dateini" runat="server" BehaviorID="ce_dateini" TargetControlID="txt_dateini" Format="yyyy/MM/dd" />
                                 <div class="text-right">
                                     <asp:RequiredFieldValidator ID="rfv_dateini" runat="server" ErrorMessage="*Campo Obligatorio" ControlToValidate="txt_dateini" ForeColor="DarkRed"></asp:RequiredFieldValidator>
                                 </div>
@@ -59,7 +59,7 @@
                                 <h5>
                                     <asp:Label CssClass="control-label" ID="lbl_fechafin" runat="server" Text="*Fecha Final"></asp:Label></h5>
                                 <asp:TextBox CssClass="form-control" ID="txt_datefin" runat="server" placeholder="Buscar fecha final"></asp:TextBox>
-                                  <ajaxToolkit:CalendarExtender ID="CalendarExtender1" runat="server" BehaviorID="ce_datefin" TargetControlID="txt_datefin" Format="yyyy/MM/dd" />
+                                <ajaxToolkit:CalendarExtender ID="CalendarExtender1" runat="server" BehaviorID="ce_datefin" TargetControlID="txt_datefin" Format="yyyy/MM/dd" />
                                 <div class="text-right">
                                     <asp:RequiredFieldValidator ID="rfv_datefin" runat="server" ErrorMessage="*Campo Obligatorio" ControlToValidate="txt_datefin" ForeColor="DarkRed"></asp:RequiredFieldValidator>
                                 </div>
@@ -215,7 +215,6 @@
                         <div class="modal-body text-center">
 
                             <iframe id="iframe_pdf" src="" width="600" height="500" runat="server" visible="false"></iframe>
-
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-success" data-dismiss="modal" aria-hidden="true">Ok</button>
@@ -241,7 +240,6 @@
                             <video id="play_video" runat="server" visible="false" class="img-thumbnail" controls="controls">
                                 <source src="demo" type='video/mp4;codecs="avc1.42E01E, mp4a.40.2"' />
                             </video>
-
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-success" data-dismiss="modal" aria-hidden="true">Ok</button>
@@ -251,5 +249,4 @@
             </asp:UpdatePanel>
         </div>
     </div>
-
 </asp:Content>

@@ -65,7 +65,7 @@
                                     <h5>
                                         <asp:Label CssClass="control-label" ID="lbl_cp" runat="server" Text="*Código Postal"></asp:Label></h5>
                                     <div class="input-group">
-                                        <asp:TextBox CssClass="form-control" ID="txt_cp" runat="server" placeholder="Capturar Código Postal" MaxLength="5" ToolTip="Base SEPOMEX" ></asp:TextBox>
+                                        <asp:TextBox CssClass="form-control" ID="txt_cp" runat="server" placeholder="Capturar Código Postal" MaxLength="5" ToolTip="Base SEPOMEX"></asp:TextBox>
                                         <ajaxToolkit:MaskedEditExtender ID="mee_cp" runat="server" TargetControlID="txt_cp" Mask="99999" />
                                         <span class="input-group-btn">
                                             <asp:Button CssClass="btn" ID="btn_cp" runat="server" Text="validar" OnClick="btn_cp_Click" />
@@ -93,9 +93,7 @@
                                         <asp:Label CssClass="control-label" ID="lbl_estado" runat="server" Text="Estado"></asp:Label></h5>
                                     <asp:TextBox CssClass="form-control" ID="txt_estado" runat="server" placeholder="Estado" Enabled="false" ToolTip="Base SEPOMEX"></asp:TextBox>
                                 </div>
-
                             </div>
-
                         </div>
                         <hr />
                         <div class="row">
@@ -125,7 +123,6 @@
                                     <h5>
                                         <asp:Label CssClass="control-label" ID="lbl_amater" runat="server" Text="Apellido Materno"></asp:Label></h5>
                                     <asp:TextBox CssClass="form-control" ID="txt_amater" runat="server" placeholder="Capturar Apellido Materno"></asp:TextBox>
-
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -176,7 +173,6 @@
                         </div>
                     </div>
                 </ContentTemplate>
-
             </asp:UpdatePanel>
         </div>
     </div>

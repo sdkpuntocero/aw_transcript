@@ -79,8 +79,6 @@
                                 </asp:GridView>
                                 <br />
                             </div>
-
-
                         </div>
                         <div class="row">
 
@@ -194,8 +192,6 @@
                                             <asp:RequiredFieldValidator ID="rfv_sala" runat="server" ErrorMessage="*Campo Obligatorio" ControlToValidate="txt_sala" ForeColor="DarkRed" Enabled="false"></asp:RequiredFieldValidator>
                                         </div>
                                     </div>
-
-
                                 </div>
 
                                 <div class="col-md-6">

@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -11,20 +9,18 @@ namespace aw_transcript
 {
     public partial class programar_carga : System.Web.UI.Page
     {
-        static Guid guid_fidusuario, guid_fidcentro;
+        private static Guid guid_fidusuario, guid_fidcentro;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
-
                 if (!IsPostBack)
                 {
                     inf_user();
-
                 }
                 else
                 {
-
                 }
             }
             catch
@@ -32,6 +28,7 @@ namespace aw_transcript
                 Response.Redirect("acceso.aspx");
             }
         }
+
         private void inf_user()
         {
             guid_fidusuario = (Guid)(Session["ss_id_user"]);
@@ -51,7 +48,6 @@ namespace aw_transcript
                                      i_tu.id_tipo_usuario,
                                      i_e.nombre,
                                      i_e.id_tribunal
-
                                  }).FirstOrDefault();
 
                 lbl_fuser.Text = i_usuario.nombres + " " + i_usuario.a_paterno + " " + i_usuario.a_materno;
@@ -59,7 +55,6 @@ namespace aw_transcript
                 lbl_idprofileuser.Text = i_usuario.id_tipo_usuario.ToString();
                 lbl_centername.Text = i_usuario.nombre;
                 guid_fidcentro = i_usuario.id_tribunal;
-
             }
 
             using (db_transcriptEntities edm_fecha_transf = new db_transcriptEntities())
@@ -73,21 +68,21 @@ namespace aw_transcript
                 }
                 else
                 {
-
                     lblModalTitle.Text = "transcript";
                     lblModalBody.Text = "Sin registro, favor de agregar uno";
                     ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
                     upModal.Update();
                 }
             }
-
         }
+
         protected void rb_add_transformation_CheckedChanged(object sender, EventArgs e)
         {
             rb_edit_transformation.Checked = false;
             clean_txt();
             div_inftransformation.Visible = true;
         }
+
         private void clean_txt()
         {
             txt_date.Text = "";
@@ -96,6 +91,7 @@ namespace aw_transcript
             gv_transformationf.Visible = false;
             gv_transformation.Visible = false;
         }
+
         protected void rb_edit_transformation_CheckedChanged(object sender, EventArgs e)
         {
             div_inftransformation.Visible = true;
@@ -111,13 +107,11 @@ namespace aw_transcript
                                           u.id_fecha_transformacion,
                                           u.horario,
                                           u.fecha_registro
-
                                       }).ToList();
 
                 if (i_fecha_transf.Count == 0)
                 {
                     rb_edit_transformation.Checked = false;
-
 
                     lblModalTitle.Text = "transcript";
                     lblModalBody.Text = "Sin registro, favor de agregar uno";
@@ -132,6 +126,7 @@ namespace aw_transcript
                 }
             }
         }
+
         protected void chkselect_transformation(object sender, EventArgs e)
         {
             foreach (GridViewRow row in gv_transformation.Rows)
@@ -153,12 +148,10 @@ namespace aw_transcript
                                                       u.id_fecha_transformacion,
                                                       u.horario,
                                                       u.fecha_registro
-
                                                   }).FirstOrDefault();
 
                             CultureInfo ci = CultureInfo.InvariantCulture;
-                         
-                        
+
                             DateTime str_date = Convert.ToDateTime(i_fecha_transf.horario);
                             //txt_date.Attributes["value"] = str_date.ToShortDateString();
                             txt_date.Text = str_date.ToString("yyyy/MM/dd");
@@ -201,7 +194,6 @@ namespace aw_transcript
         {
             if (rb_add_transformation.Checked || rb_edit_transformation.Checked)
             {
-
                 string str_date = txt_date.Text;
                 string str_hora = txt_hora.Text;
                 //string str_format = ddl_fhora.SelectedValue;
@@ -219,7 +211,6 @@ namespace aw_transcript
                             id_usuario = guid_fidusuario,
                             id_tribunal = guid_fidcentro,
                             fecha_registro = DateTime.Now
-
                         };
                         edm_fecha_transf.inf_fecha_transformacion.Add(ii_fecha_transf);
                         edm_fecha_transf.SaveChanges();
@@ -232,7 +223,6 @@ namespace aw_transcript
 
                         if (ii_fecha_transf.Count == 0)
                         {
-
                         }
                         else
                         {
@@ -244,7 +234,6 @@ namespace aw_transcript
                                     id_fecha_transformacion = ii_fecha_transf[0].id_fecha_transformacion,
                                     id_tipo_accion = id_accion(),
                                     fecha_registro = DateTime.Now,
-
                                 };
                                 insert_user.inf_fecha_transformacion_dep.Add(items_user);
                                 insert_user.SaveChanges();
@@ -259,11 +248,9 @@ namespace aw_transcript
                                                where u.horario == str_horario
                                                select new
                                                {
-
                                                    u.id_fecha_transformacion,
                                                    u.horario,
                                                    u.fecha_registro
-
                                                }).ToList();
 
                         gv_transformationf.DataSource = ii_fecha_transf;
@@ -304,7 +291,6 @@ namespace aw_transcript
 
                                     if (ii_fecha_transf.Count == 0)
                                     {
-
                                     }
                                     else
                                     {
@@ -316,7 +302,6 @@ namespace aw_transcript
                                                 id_fecha_transformacion = ii_fecha_transf[0].id_fecha_transformacion,
                                                 id_tipo_accion = id_accion(),
                                                 fecha_registro = DateTime.Now,
-
                                             };
                                             insert_user.inf_fecha_transformacion_dep.Add(items_user);
                                             insert_user.SaveChanges();
@@ -337,25 +322,19 @@ namespace aw_transcript
                                                                u.id_fecha_transformacion,
                                                                u.horario,
                                                                u.fecha_registro
-
                                                            }).ToList();
-
 
                                     gv_transformation.DataSource = ii_fecha_transf;
                                     gv_transformation.DataBind();
                                     gv_transformation.Visible = true;
-
                                 }
                             }
                         }
                     }
                 }
-
-
             }
             else
             {
-
                 lblModalTitle.Text = "transcript";
                 lblModalBody.Text = "Favor de seleccionar una accion";
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);

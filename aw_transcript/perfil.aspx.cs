@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -9,19 +7,18 @@ namespace aw_transcript
 {
     public partial class perfil : System.Web.UI.Page
     {
-        static Guid guid_fidusuario, guid_fidcentro;
+        private static Guid guid_fidusuario, guid_fidcentro;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
-
                 if (!IsPostBack)
                 {
                     inf_user();
                 }
                 else
                 {
-
                 }
             }
             catch
@@ -29,6 +26,7 @@ namespace aw_transcript
                 Response.Redirect("acceso.aspx");
             }
         }
+
         private void inf_user()
         {
             guid_fidusuario = (Guid)(Session["ss_id_user"]);
@@ -48,7 +46,6 @@ namespace aw_transcript
                                      i_tu.id_tipo_usuario,
                                      i_e.nombre,
                                      i_e.id_tribunal
-
                                  }).FirstOrDefault();
 
                 lbl_fuser.Text = i_usuario.nombres + " " + i_usuario.a_paterno + " " + i_usuario.a_materno;
@@ -56,9 +53,9 @@ namespace aw_transcript
                 lbl_idprofileuser.Text = i_usuario.id_tipo_usuario.ToString();
                 lbl_centername.Text = i_usuario.nombre;
                 guid_fidcentro = i_usuario.id_tribunal;
-
             }
         }
+
         protected void cmd_save_Click(object sender, EventArgs e)
         {
             string str_nameuser = txt_name_user.Text.ToUpper();
@@ -66,7 +63,6 @@ namespace aw_transcript
             string str_amater = txt_amater.Text.ToUpper();
             string str_codeuser = txt_code_user.Text.ToLower();
             string str_password = encrypta.Encrypt(txt_password.Text.ToLower());
-
 
             using (db_transcriptEntities data_user = new db_transcriptEntities())
             {
@@ -76,7 +72,6 @@ namespace aw_transcript
 
                 if (items_user[0].codigo_usuario == str_codeuser)
                 {
-
                     using (var data_userf = new db_transcriptEntities())
                     {
                         var items_userf = (from c in data_userf.inf_usuarios
@@ -107,7 +102,6 @@ namespace aw_transcript
                                              i_tu.id_tipo_usuario,
                                              i_e.nombre,
                                              i_e.id_tribunal
-
                                          }).FirstOrDefault();
 
                         lbl_fuser.Text = i_usuario.nombres + " " + i_usuario.a_paterno + " " + i_usuario.a_materno;
@@ -115,7 +109,6 @@ namespace aw_transcript
                         lbl_idprofileuser.Text = i_usuario.id_tipo_usuario.ToString();
                         lbl_centername.Text = i_usuario.nombre;
                         guid_fidcentro = i_usuario.id_tribunal;
-
                     }
 
                     clean_data();
@@ -134,7 +127,6 @@ namespace aw_transcript
 
                         if (items_userb.Count == 0)
                         {
-
                             using (var data_userf = new db_transcriptEntities())
                             {
                                 var items_userf = (from c in data_userf.inf_usuarios
@@ -165,7 +157,6 @@ namespace aw_transcript
                                                      i_tu.id_tipo_usuario,
                                                      i_e.nombre,
                                                      i_e.id_tribunal
-
                                                  }).FirstOrDefault();
 
                                 lbl_fuser.Text = i_usuario.nombres + " " + i_usuario.a_paterno + " " + i_usuario.a_materno;
@@ -173,7 +164,6 @@ namespace aw_transcript
                                 lbl_idprofileuser.Text = i_usuario.id_tipo_usuario.ToString();
                                 lbl_centername.Text = i_usuario.nombre;
                                 guid_fidcentro = i_usuario.id_tribunal;
-
                             }
 
                             clean_data();
@@ -191,6 +181,7 @@ namespace aw_transcript
                 }
             }
         }
+
         private void clean_data()
         {
             txt_name_user.Text = "";
@@ -199,6 +190,7 @@ namespace aw_transcript
             txt_code_user.Text = "";
             txt_password.Text = "";
         }
+
         protected void chkb_editar_CheckedChanged(object sender, EventArgs e)
         {
             if (chkb_editar.Checked)
@@ -216,7 +208,6 @@ namespace aw_transcript
                                         u.nombres,
                                         u.a_paterno,
                                         u.a_materno,
-
                                     }).FirstOrDefault();
 
                     txt_name_user.Text = inf_user.nombres;

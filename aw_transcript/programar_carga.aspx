@@ -56,7 +56,7 @@
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
                                                             <asp:BoundField DataField="id_fecha_transformacion" HeaderText="ID" SortExpression="id_fecha_transformacion" Visible="true" />
-                                                            <asp:BoundField DataField="horario" HeaderText="Horario" SortExpression="Fecha y Hora"  />
+                                                            <asp:BoundField DataField="horario" HeaderText="Horario" SortExpression="Fecha y Hora" />
                                                             <asp:BoundField DataField="fecha_registro" HeaderText="Fecha de Registro" SortExpression="fecha_registro" DataFormatString="{0:dd/MM/yyyy}" />
                                                         </Columns>
                                                     </asp:GridView>
@@ -66,8 +66,8 @@
                                                     <div class="form-group">
                                                         <h5>
                                                             <asp:Label CssClass="control-label" ID="lbl_fecha" runat="server" Text="*Fecha"></asp:Label></h5>
-                                                        <asp:TextBox CssClass="form-control" ID="txt_date" runat="server" ></asp:TextBox>
-                                                           <ajaxToolkit:CalendarExtender ID="ce_date" runat="server" BehaviorID="ce_date" TargetControlID="txt_date" Format="yyyy/MM/dd" />
+                                                        <asp:TextBox CssClass="form-control" ID="txt_date" runat="server"></asp:TextBox>
+                                                        <ajaxToolkit:CalendarExtender ID="ce_date" runat="server" BehaviorID="ce_date" TargetControlID="txt_date" Format="yyyy/MM/dd" />
                                                         <div class="text-right">
                                                             <asp:RequiredFieldValidator ID="rfv_date" runat="server" ErrorMessage="*Campo Obligatorio" ControlToValidate="txt_date" ForeColor="DarkRed"></asp:RequiredFieldValidator>
                                                         </div>
@@ -87,7 +87,6 @@
                                                             <asp:RequiredFieldValidator ID="rfv_hora" runat="server" ErrorMessage="*Campo Obligatorio" ControlToValidate="txt_hora" ForeColor="DarkRed"></asp:RequiredFieldValidator>
                                                         </div>
                                                     </div>
-
                                                 </div>
                                                 <%--    <div class="col-md-3">
                                                     <div class="form-group">

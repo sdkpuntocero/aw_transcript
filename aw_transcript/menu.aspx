@@ -1,8 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/site.Master" AutoEventWireup="true" CodeBehind="menu.aspx.cs" Inherits="aw_transcript.menu" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <div class="section">
         <div class="container">
             <div class="row">
@@ -41,12 +42,12 @@
                     <h5>Control de Usuarios</h5>
                     <asp:ImageButton ID="img_control_users" runat="server" ImageUrl="~/img/iconos/contro de usuarios@2x.png" OnClick="img_control_users_Click" />
                 </div>
-           
-                    <div class="col-md-4 text-center" id="div_control_centers" runat="server">
-                        <h5>Control de Centros</h5>
-                        <asp:ImageButton ID="img_control_centers" runat="server" ImageUrl="~/img/iconos/control de centros@2x.png" OnClick="img_control_centers_Click" />
-                    </div>
-             
+
+                <div class="col-md-4 text-center" id="div_control_centers" runat="server">
+                    <h5>Control de Centros</h5>
+                    <asp:ImageButton ID="img_control_centers" runat="server" ImageUrl="~/img/iconos/control de centros@2x.png" OnClick="img_control_centers_Click" />
+                </div>
+
                 <div class="col-md-4 text-center" id="div_material" runat="server">
                     <h5>Herramientas</h5>
                     <asp:ImageButton ID="img_material" runat="server" ImageUrl="~/img/iconos/herramientas@2x.png" OnClick="img_material_Click" />

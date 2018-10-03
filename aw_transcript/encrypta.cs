@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Web;
 
 namespace aw_transcript
 {
@@ -14,9 +11,12 @@ namespace aw_transcript
         // This size of the IV (in bytes) must = (keysize / 8).  Default keysize is 256, so the IV must be
         // 32 bytes long.  Using a 16 character string here gives us 32 bytes when converted to a byte array.
         private static readonly byte[] initVectorBytes = Encoding.ASCII.GetBytes("tu89geji340t89u2");
+
         // This constant is used to determine the keysize of the encryption algorithm.
         private const int keysize = 256;
+
         private const string passPhrase = "dev_.0";
+
         public static string Encrypt(string plainText)
         {
             byte[] plainTextBytes = Encoding.UTF8.GetBytes(plainText);
@@ -42,6 +42,7 @@ namespace aw_transcript
                 }
             }
         }
+
         public static string Decrypt(string cipherText)
         {
             byte[] cipherTextBytes = Convert.FromBase64String(cipherText);
